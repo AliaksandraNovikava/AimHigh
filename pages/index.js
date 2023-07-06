@@ -1,4 +1,4 @@
-const goals = [
+export const goals = [
   {
     id: 1,
     name: "Walking",
@@ -71,7 +71,7 @@ const goals = [
   },
 ];
 
-export default function HomePage() {
+export default function HomePage({ goals }) {
   return (
     <div>
       <h1>Hello from Next.js</h1>
