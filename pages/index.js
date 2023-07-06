@@ -76,7 +76,7 @@ import ProposedGoalsList from "@/components/ProposedGoalsList";
 export default function HomePage({ goals }) {
   return (
     <div>
-      <h1>Hello from Next.js</h1>
+      <h1>Choose goal</h1>
       <ProposedGoalsList goals={goals} />
     </div>
   );
