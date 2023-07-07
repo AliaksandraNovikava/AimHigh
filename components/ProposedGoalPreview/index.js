@@ -7,11 +7,9 @@ const StyledTitle = styled.p`
 
 export default function ProposedGoalPreview({ image, title }) {
   return (
-    <>
-      <div>
-        <Image src={image} alt={title} width={40} height={40} />
-        <StyledTitle>{title}</StyledTitle>
-      </div>
-    </>
+    <div>
+      <Image src={image} alt={title} width={40} height={40} />
+      <StyledTitle>{title}</StyledTitle>
+    </div>
   );
 }

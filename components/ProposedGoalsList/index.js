@@ -8,7 +8,7 @@ const StyledList = styled.div`
   padding-bottom: 25px;
 `;
 
-const StyledCard = styled.div`
+const StyledCard = styled.article`
   padding: 20px;
   border-radius: 15px;
   background-color: ${(props) => props.backgroundColor};
@@ -17,17 +17,15 @@ const StyledCard = styled.div`
 
 export default function ProposedGoalsList({ goals, categoryColors }) {
   return (
-    <>
-      <StyledList>
-        {goals.map((goal) => (
-          <StyledCard
-            key={goal.id}
-            backgroundColor={categoryColors[goal.category]}
-          >
-            <ProposedGoalPreview image={goal.icon} title={goal.name} />
-          </StyledCard>
-        ))}
-      </StyledList>
-    </>
+    <StyledList>
+      {goals.map((goal) => (
+        <StyledCard
+          key={goal.id}
+          backgroundColor={categoryColors[goal.category]}
+        >
+          <ProposedGoalPreview image={goal.icon} title={goal.name} />
+        </StyledCard>
+      ))}
+    </StyledList>
   );
 }

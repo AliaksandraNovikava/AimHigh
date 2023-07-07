@@ -9,9 +9,9 @@ const StyledHeading = styled.h2`
 
 export default function HomePage({ goals, categoryColors }) {
   return (
-    <div>
+    <>
       <StyledHeading>Choose goal</StyledHeading>
       <ProposedGoalsList goals={goals} categoryColors={categoryColors} />
-    </div>
+    </>
   );
 }
