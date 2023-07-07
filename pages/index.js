@@ -1,4 +1,5 @@
 import ProposedGoalsList from "@/components/ProposedGoalsList";
+import NewGoalForm from "@/components/NewGoalForm";
 import styled from "styled-components";
 
 const StyledHeading = styled.h2`
@@ -12,6 +13,7 @@ export default function HomePage({ goals, categoryColors }) {
     <>
       <StyledHeading>Choose goal</StyledHeading>
       <ProposedGoalsList goals={goals} categoryColors={categoryColors} />
+      <NewGoalForm goals={goals} />
     </>
   );
 }

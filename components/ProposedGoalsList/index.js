@@ -17,15 +17,17 @@ const StyledCard = styled.article`
 
 export default function ProposedGoalsList({ goals, categoryColors }) {
   return (
-    <StyledList>
-      {goals.map((goal) => (
-        <StyledCard
-          key={goal.id}
-          backgroundColor={categoryColors[goal.category]}
-        >
-          <ProposedGoalPreview image={goal.icon} title={goal.name} />
-        </StyledCard>
-      ))}
-    </StyledList>
+    <>
+      <StyledList>
+        {goals.map((goal) => (
+          <StyledCard
+            key={goal.id}
+            backgroundColor={categoryColors[goal.category]}
+          >
+            <ProposedGoalPreview image={goal.icon} title={goal.name} />
+          </StyledCard>
+        ))}
+      </StyledList>
+    </>
   );
 }
