@@ -15,6 +15,26 @@ export default function NewGoalForm({ goals }) {
     setMyGoal(event.target.value);
   };
 
+  const handleRepetitionChange = () => {
+    setRepetition(!repetition);
+  };
+
+  const handleTargetPerIntervalChange = (value) => {
+    setTargetPerInterval(value);
+  };
+
+  const handleIntervalChange = (event) => {
+    setInterval(event.target.value);
+  };
+
+  const handleDeadlineVisibleChange = () => {
+    setDeadlineVisible(!deadlineVisible);
+  };
+
+  const handleDeadlineChange = (event) => {
+    setDeadline(event.target.value);
+  };
+
   return (
     <>
       <form onSubmit>
@@ -33,23 +53,37 @@ export default function NewGoalForm({ goals }) {
             type="checkbox"
             id="repetitionCheckbox"
             checked={repetition}
-            onChange
+            onChange={handleRepetitionChange}
           />
         </div>
         {repetition && (
           <div>
-            <button type="button" onClick>
+            <button
+              type="button"
+              onClick={() =>
+                handleTargetPerIntervalChange(targetPerInterval - 1)
+              }
+            >
               -
             </button>
             <span>{targetPerInterval}</span>
-            <button type="button" onClick>
+            <button
+              type="button"
+              onClick={() =>
+                handleTargetPerIntervalChange(targetPerInterval + 1)
+              }
+            >
               +
             </button>
           </div>
         )}
         <div>
           <label htmlFor="intervalSelect">set interval</label>
-          <select id="intervalSelect" value={interval} onChange>
+          <select
+            id="intervalSelect"
+            value={interval}
+            onChange={handleIntervalChange}
+          >
             <option value="day">Day</option>
             <option value="week">Week</option>
             <option value="month">Month</option>
@@ -61,12 +95,17 @@ export default function NewGoalForm({ goals }) {
             type="checkbox"
             id="setDeadlineCheckbox"
             checked={deadlineVisible}
-            onChange
+            onChange={handleDeadlineVisibleChange}
           />
         </div>
         {deadlineVisible && (
           <div>
-            <input type="date" id="deadlineInput" value={deadline} onChange />
+            <input
+              type="date"
+              id="deadlineInput"
+              value={deadline}
+              onChange={handleDeadlineChange}
+            />
           </div>
         )}
         <button type="submit">Add your goal</button>
