@@ -4,7 +4,7 @@ export default function ProposedGoalPreview({ image, title }) {
   return (
     <>
       <div>
-        <Image src={image} alt={title} width={136} height={136} />
+        <Image src={image} alt={title} width={48} height={48} />
         <p>{title}</p>
       </div>
     </>
