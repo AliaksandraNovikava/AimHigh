@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import styled from "styled-components";
 import Image from "next/image";
 
@@ -51,113 +50,24 @@ const StyledOverlay = styled.section`
   z-index: 1;
 `;
 
-export default function NewGoalForm({ goals }) {
-  const { description, icon, category, name } = goals;
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedGoal, setSelectedGoal] = useState(null);
-  const [newGoal, setNewGoal] = useState({
-    myGoal: "",
-    repetition: false,
-    targetPerInterval: 1,
-    interval: "",
-    deadlineVisible: false,
-    deadline: "",
-    myNewGoals: [],
-  });
-
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
-    setSelectedGoal(null);
-    // setNewGoal("");
-  };
-
-  const handleOpenModalFromListItem = (goal) => {
-    setIsModalOpen(true);
-    setSelectedGoal(goal);
-    // setNewGoal("");
-  };
-
-  //   const handleChange = (event) => {
-  //     setNewGoal({
-  //       ...newGoal,
-  //       [event.target.name]: event.target.value,
-  //       [event.target.interval]: event.target.value,
-  //       [event.target.deadline]: event.target.value,
-  //     });
-  //   };
-
-  const handleChange = (event) => {
-    setNewGoal((prevState) => ({
-      ...prevState,
-      myGoal: event.target.value,
-    }));
-  };
-
-  const handleTargetPerIntervalChange = (value) => {
-    setNewGoal((prevState) => ({
-      ...prevState,
-      targetPerInterval: value,
-    }));
-  };
-
-  const handleAddGoal = (event) => {
-    event.preventDefault();
-    const myNewGoal = {
-      id: goals.length + newGoal.myNewGoals.length,
-      name: selectedGoal ? selectedGoal.description : newGoal.myGoal,
-      targetPerInterval: newGoal.targetPerInterval,
-      interval: newGoal.repetition ? newGoal.interval : null,
-      deadline: newGoal.deadlineVisible ? newGoal.deadline : null,
-      creationDate: new Date().toLocaleDateString(),
-    };
-    setNewGoal((prevGoals) => ({
-      myNewGoals: [...prevGoals.myNewGoals, myNewGoal],
-      myGoal: "",
-      repetition: false,
-      targetPerInterval: 1,
-      interval: false,
-      deadlineVisible: false,
-      deadline: "",
-    }));
-    setIsModalOpen(false);
-    event.target.reset();
-    console.log(newGoal.myNewGoals);
-    console.log(myNewGoal);
-  };
-
-  useEffect(() => {
-    const handleEscapeKeyPress = (e) => {
-      if (e.key === "Escape" && isModalOpen) {
-        closeModal();
-      }
-    };
-
-    document.addEventListener("keydown", handleEscapeKeyPress);
-
-    return () => {
-      document.removeEventListener("keydown", handleEscapeKeyPress);
-    };
-  }, [isModalOpen]);
-
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
+export default function NewGoalForm({
+  goals,
+  newGoal,
+  isModalOpen,
+  closeModal,
+  handleInputChange,
+  handleTargetPerIntervalChange,
+  handleAddGoal,
+  selectedGoal,
+}) {
   return (
     <>
-      <button onClick={handleOpenModal}>Open Modal</button>
       {isModalOpen && (
         <StyledModalBody>
           <StyledModal hidden>
             <StyledModalCloseBtnContainer>
               <StyledModalCloseBtn onClick={closeModal}>x</StyledModalCloseBtn>
             </StyledModalCloseBtnContainer>
-
             <form onSubmit={handleAddGoal}>
               {selectedGoal ? (
                 <>
@@ -172,32 +82,23 @@ export default function NewGoalForm({ goals }) {
               ) : (
                 <>
                   <Image
-                    src={goals.icon}
-                    alt={goals.name}
+                    src="/icons/icons8-bullseye-48.png"
+                    alt="your new goal"
                     width={40}
                     height={40}
                   />
                   <div>
                     <label htmlFor="newGoalInput">I want to</label>
+                    <br></br>
                     <input
                       type="text"
                       id="newGoalInput"
                       value={newGoal.myGoal}
-                      onChange={handleChange}
+                      onChange={handleInputChange}
                     />
                   </div>
                 </>
               )}
-              {/* <label htmlFor="goalInput">I want to</label>
-                <br></br>
-                <input
-                  name="myGoal"
-                  type="text"
-                  id="goalInput"
-                  value={newGoal.myGoal}
-                  onChange={handleChange}
-                />
-              </div> */}
               <div>
                 <label htmlFor="repetitionCheckbox">set repetition:</label>
                 <input
@@ -205,7 +106,7 @@ export default function NewGoalForm({ goals }) {
                   type="checkbox"
                   id="repetitionCheckbox"
                   checked={newGoal.repetition}
-                  onChange={handleChange}
+                  onChange={handleInputChange}
                 />
               </div>
               {newGoal.repetition && (
@@ -237,12 +138,12 @@ export default function NewGoalForm({ goals }) {
                   </div>
 
                   <div>
-                    <label htmlFor="intervalSelect">set interval</label>
+                    <label htmlFor="intervalSelect">times a </label>
                     <select
                       name="interval"
                       id="intervalSelect"
                       value={newGoal.interval}
-                      onChange={handleChange}
+                      onChange={handleInputChange}
                     >
                       <option value="day">Day</option>
                       <option value="week">Week</option>
@@ -258,7 +159,7 @@ export default function NewGoalForm({ goals }) {
                   type="checkbox"
                   id="setDeadlineCheckbox"
                   checked={newGoal.deadlineVisible}
-                  onChange={handleChange}
+                  onChange={handleInputChange}
                 />
               </div>
               {newGoal.deadlineVisible && (
@@ -268,13 +169,11 @@ export default function NewGoalForm({ goals }) {
                     type="date"
                     id="deadlineInput"
                     value={newGoal.deadline}
-                    onChange={handleChange}
+                    onChange={handleInputChange}
                   />
                 </div>
               )}
-              <button type="submit" disabled={!newGoal.myGoal}>
-                Add your goal
-              </button>
+              <button type="submit">Add your goal</button>
             </form>
           </StyledModal>
           <StyledOverlay onClick={closeModal} />

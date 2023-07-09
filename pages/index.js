@@ -2,7 +2,6 @@ import ProposedGoalsList from "@/components/ProposedGoalsList";
 import NewGoalForm from "@/components/NewGoalForm";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import Image from "next/image";
 
 const StyledHeading = styled.h2`
   font-size: 21px;
@@ -15,7 +14,6 @@ const StyledModalBody = styled.section`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* position: relative; */
 `;
 
 const StyledModal = styled.section`
@@ -109,7 +107,7 @@ export default function HomePage({ goals, categoryColors }) {
   const handleAddGoal = (event) => {
     event.preventDefault();
     const myNewGoal = {
-      id: goals.length + newGoal.myNewGoals.length,
+      id: goals.length++,
       name: selectedGoal ? selectedGoal.description : newGoal.myGoal,
       targetPerInterval: newGoal.targetPerInterval,
       interval: newGoal.repetition ? newGoal.interval : null,
@@ -145,12 +143,16 @@ export default function HomePage({ goals, categoryColors }) {
     };
   }, [isModalOpen]);
 
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
   const closeModal = () => {
     setIsModalOpen(false);
+    setNewGoal(() => ({
+      myGoal: "",
+      repetition: false,
+      targetPerInterval: 1,
+      interval: "day",
+      deadlineVisible: false,
+      deadline: "",
+    }));
   };
 
   return (
@@ -161,10 +163,19 @@ export default function HomePage({ goals, categoryColors }) {
         categoryColors={categoryColors}
         onOpenModal={handleOpenModalFromListItem}
       />
-      {/* <NewGoalForm goals={goals} /> */}
       <button onClick={handleOpenModal}>Set your own goal</button>
 
-      {isModalOpen && (
+      <NewGoalForm
+        newGoal={newGoal}
+        isModalOpen={isModalOpen}
+        closeModal={closeModal}
+        handleInputChange={handleInputChange}
+        handleTargetPerIntervalChange={handleTargetPerIntervalChange}
+        handleAddGoal={handleAddGoal}
+        selectedGoal={selectedGoal}
+      />
+
+      {/* {isModalOpen && (
         <StyledModalBody>
           <StyledModal hidden>
             <StyledModalCloseBtnContainer>
@@ -280,7 +291,7 @@ export default function HomePage({ goals, categoryColors }) {
           </StyledModal>
           <StyledOverlay onClick={closeModal} />
         </StyledModalBody>
-      )}
+      )} */}
     </>
   );
 }
