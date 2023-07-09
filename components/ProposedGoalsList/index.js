@@ -15,7 +15,11 @@ const StyledCard = styled.article`
   box-shadow: 0 2px 6px rgb(109 94 255 / 10%);
 `;
 
-export default function ProposedGoalsList({ goals, categoryColors }) {
+export default function ProposedGoalsList({
+  goals,
+  categoryColors,
+  onOpenModal,
+}) {
   return (
     <>
       <StyledList>
@@ -23,6 +27,7 @@ export default function ProposedGoalsList({ goals, categoryColors }) {
           <StyledCard
             key={goal.id}
             backgroundColor={categoryColors[goal.category]}
+            onClick={() => onOpenModal(goal)}
           >
             <ProposedGoalPreview image={goal.icon} title={goal.name} />
           </StyledCard>
