@@ -62,29 +62,55 @@ const StyledOverlay = styled.section`
 export default function HomePage({ goals, categoryColors }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedGoal, setSelectedGoal] = useState(null);
-  const [newGoal, setNewGoal] = useState("");
+  const [newGoal, setNewGoal] = useState({
+    myGoal: "",
+    repetition: false,
+    targetPerInterval: 1,
+    interval: "day",
+    deadlineVisible: false,
+    deadline: "",
+    myNewGoals: [],
+  });
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
     setSelectedGoal(null);
-    setNewGoal("");
   };
 
   const handleOpenModalFromListItem = (goal) => {
     setIsModalOpen(true);
     setSelectedGoal(goal);
-    setNewGoal("");
   };
 
   const handleInputChange = (event) => {
-    setNewGoal(event.target.value);
+    const { name, value, type, checked } = event.target;
+
+    if (type === "checkbox") {
+      setNewGoal((prevState) => ({
+        ...prevState,
+        [name]: checked,
+      }));
+    } else {
+      setNewGoal((prevState) => ({
+        ...prevState,
+        [name]: value,
+        myGoal: value,
+      }));
+    }
+  };
+
+  const handleTargetPerIntervalChange = (value) => {
+    setNewGoal((prevState) => ({
+      ...prevState,
+      targetPerInterval: value,
+    }));
   };
 
   const handleAddGoal = (event) => {
     event.preventDefault();
     const myNewGoal = {
       id: goals.length + newGoal.myNewGoals.length,
-      name: newGoal.myGoal,
+      name: selectedGoal ? selectedGoal.description : newGoal.myGoal,
       targetPerInterval: newGoal.targetPerInterval,
       interval: newGoal.repetition ? newGoal.interval : null,
       deadline: newGoal.deadlineVisible ? newGoal.deadline : null,
@@ -95,7 +121,7 @@ export default function HomePage({ goals, categoryColors }) {
       myGoal: "",
       repetition: false,
       targetPerInterval: 1,
-      interval: false,
+      interval: "day",
       deadlineVisible: false,
       deadline: "",
     }));
@@ -136,7 +162,7 @@ export default function HomePage({ goals, categoryColors }) {
         onOpenModal={handleOpenModalFromListItem}
       />
       {/* <NewGoalForm goals={goals} /> */}
-      <button onClick={handleOpenModal}>Open Form</button>
+      <button onClick={handleOpenModal}>Set your own goal</button>
 
       {isModalOpen && (
         <StyledModalBody>
@@ -164,18 +190,92 @@ export default function HomePage({ goals, categoryColors }) {
                     height={40}
                   />
                   <div>
-                    <label htmlFor="newGoalInput">Enter a new goal:</label>
+                    <label htmlFor="newGoalInput">I want to</label>
+                    <br></br>
                     <input
                       type="text"
                       id="newGoalInput"
-                      value={newGoal}
+                      value={newGoal.myGoal}
                       onChange={handleInputChange}
                     />
                   </div>
                 </>
               )}
+              <div>
+                <label htmlFor="repetitionCheckbox">set repetition:</label>
+                <input
+                  name="repetition"
+                  type="checkbox"
+                  id="repetitionCheckbox"
+                  checked={newGoal.repetition}
+                  onChange={handleInputChange}
+                />
+              </div>
+              {newGoal.repetition && (
+                <>
+                  <div>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        handleTargetPerIntervalChange(
+                          newGoal.targetPerInterval < 2
+                            ? 1
+                            : newGoal.targetPerInterval - 1
+                        )
+                      }
+                    >
+                      -
+                    </button>
+                    <span>{newGoal.targetPerInterval}</span>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        handleTargetPerIntervalChange(
+                          newGoal.targetPerInterval + 1
+                        )
+                      }
+                    >
+                      +
+                    </button>
+                  </div>
 
-              <button type="submit">Submit</button>
+                  <div>
+                    <label htmlFor="intervalSelect">times a </label>
+                    <select
+                      name="interval"
+                      id="intervalSelect"
+                      value={newGoal.interval}
+                      onChange={handleInputChange}
+                    >
+                      <option value="day">Day</option>
+                      <option value="week">Week</option>
+                      <option value="month">Month</option>
+                    </select>
+                  </div>
+                </>
+              )}
+              <div>
+                <label htmlFor="setDeadlineCheckbox">set deadline</label>
+                <input
+                  name="deadlineVisible"
+                  type="checkbox"
+                  id="setDeadlineCheckbox"
+                  checked={newGoal.deadlineVisible}
+                  onChange={handleInputChange}
+                />
+              </div>
+              {newGoal.deadlineVisible && (
+                <div>
+                  <input
+                    name="deadline"
+                    type="date"
+                    id="deadlineInput"
+                    value={newGoal.deadline}
+                    onChange={handleInputChange}
+                  />
+                </div>
+              )}
+              <button type="submit">Add your goal</button>
             </form>
           </StyledModal>
           <StyledOverlay onClick={closeModal} />

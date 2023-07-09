@@ -60,7 +60,7 @@ export default function NewGoalForm({ goals }) {
     myGoal: "",
     repetition: false,
     targetPerInterval: 1,
-    interval: false,
+    interval: "",
     deadlineVisible: false,
     deadline: "",
     myNewGoals: [],
@@ -105,7 +105,7 @@ export default function NewGoalForm({ goals }) {
     event.preventDefault();
     const myNewGoal = {
       id: goals.length + newGoal.myNewGoals.length,
-      name: newGoal.myGoal,
+      name: selectedGoal ? selectedGoal.description : newGoal.myGoal,
       targetPerInterval: newGoal.targetPerInterval,
       interval: newGoal.repetition ? newGoal.interval : null,
       deadline: newGoal.deadlineVisible ? newGoal.deadline : null,
@@ -182,7 +182,7 @@ export default function NewGoalForm({ goals }) {
                     <input
                       type="text"
                       id="newGoalInput"
-                      value={newGoal}
+                      value={newGoal.myGoal}
                       onChange={handleChange}
                     />
                   </div>
