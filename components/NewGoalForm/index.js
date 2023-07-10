@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Image from "next/image";
+import Button from "../Button";
 
 const StyledModalBody = styled.section`
   display: flex;
@@ -13,6 +14,7 @@ const StyledModal = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  text-align: center;
   gap: 0.4rem;
   width: 85%;
   padding: 1.3rem;
@@ -23,19 +25,6 @@ const StyledModal = styled.section`
   border: 1px solid #ddd;
   border-radius: 15px;
   z-index: 10;
-`;
-
-const StyledModalCloseBtnContainer = styled.section`
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-`;
-
-const StyledModalCloseBtn = styled.button`
-  transform: translate(10px, -20px);
-  padding: 0.5rem 0.7rem;
-  background: #eee;
-  border-radius: 50%;
 `;
 
 const StyledOverlay = styled.section`
@@ -51,7 +40,6 @@ const StyledOverlay = styled.section`
 `;
 
 export default function NewGoalForm({
-  goals,
   newGoal,
   isModalOpen,
   closeModal,
@@ -65,9 +53,6 @@ export default function NewGoalForm({
       {isModalOpen && (
         <StyledModalBody>
           <StyledModal hidden>
-            <StyledModalCloseBtnContainer>
-              <StyledModalCloseBtn onClick={closeModal}>x</StyledModalCloseBtn>
-            </StyledModalCloseBtnContainer>
             <form onSubmit={handleAddGoal}>
               {selectedGoal ? (
                 <>
@@ -78,39 +63,6 @@ export default function NewGoalForm({
                     height={40}
                   />
                   <p>{selectedGoal.description}</p>
-                </>
-              ) : (
-                <>
-                  <Image
-                    src="/icons/icons8-bullseye-48.png"
-                    alt="your new goal"
-                    width={40}
-                    height={40}
-                  />
-                  <div>
-                    <label htmlFor="newGoalInput">I want to</label>
-                    <br></br>
-                    <input
-                      type="text"
-                      id="newGoalInput"
-                      value={newGoal.myGoal}
-                      onChange={handleInputChange}
-                    />
-                  </div>
-                </>
-              )}
-              <div>
-                <label htmlFor="repetitionCheckbox">set repetition:</label>
-                <input
-                  name="repetition"
-                  type="checkbox"
-                  id="repetitionCheckbox"
-                  checked={newGoal.repetition}
-                  onChange={handleInputChange}
-                />
-              </div>
-              {newGoal.repetition && (
-                <>
                   <div>
                     <button
                       type="button"
@@ -151,7 +103,80 @@ export default function NewGoalForm({
                     </select>
                   </div>
                 </>
+              ) : (
+                <>
+                  <Image
+                    src="/icons/icons8-bullseye-48.png"
+                    alt="your new goal"
+                    width={40}
+                    height={40}
+                  />
+                  <div>
+                    <label htmlFor="newGoalInput">I want to</label>
+                    <br></br>
+                    <input
+                      type="text"
+                      id="newGoalInput"
+                      value={newGoal.myGoal}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="repetitionCheckbox">set repetition:</label>
+                    <input
+                      name="repetition"
+                      type="checkbox"
+                      id="repetitionCheckbox"
+                      checked={newGoal.repetition}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                  {newGoal.repetition && (
+                    <>
+                      <div>
+                        <button
+                          type="button"
+                          onClick={() =>
+                            handleTargetPerIntervalChange(
+                              newGoal.targetPerInterval < 2
+                                ? 1
+                                : newGoal.targetPerInterval - 1
+                            )
+                          }
+                        >
+                          -
+                        </button>
+                        <span>{newGoal.targetPerInterval}</span>
+                        <button
+                          type="button"
+                          onClick={() =>
+                            handleTargetPerIntervalChange(
+                              newGoal.targetPerInterval + 1
+                            )
+                          }
+                        >
+                          +
+                        </button>
+                      </div>
+
+                      <div>
+                        <label htmlFor="intervalSelect">times a </label>
+                        <select
+                          name="interval"
+                          id="intervalSelect"
+                          value={newGoal.interval}
+                          onChange={handleInputChange}
+                        >
+                          <option value="day">Day</option>
+                          <option value="week">Week</option>
+                          <option value="month">Month</option>
+                        </select>
+                      </div>
+                    </>
+                  )}
+                </>
               )}
+
               <div>
                 <label htmlFor="setDeadlineCheckbox">set deadline</label>
                 <input
@@ -173,7 +198,7 @@ export default function NewGoalForm({
                   />
                 </div>
               )}
-              <button type="submit">Add your goal</button>
+              <Button type="submit">Add your goal</Button>
             </form>
           </StyledModal>
           <StyledOverlay onClick={closeModal} />
