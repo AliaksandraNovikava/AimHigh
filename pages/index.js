@@ -2,6 +2,7 @@ import ProposedGoalsList from "@/components/ProposedGoalsList";
 import NewGoalForm from "@/components/NewGoalForm";
 import Button from "@/components/Button";
 import { useState, useEffect } from "react";
+import { uid } from "uid";
 import styled from "styled-components";
 
 const StyledHeading = styled.h2`
@@ -60,10 +61,18 @@ export default function HomePage({ goals, categoryColors }) {
   const handleAddGoal = (event) => {
     event.preventDefault();
     const myNewGoal = {
-      id: (goals.length += 1),
+      id: uid(),
       name: selectedGoal ? selectedGoal.description : newGoal.myGoal,
-      targetPerInterval: newGoal.targetPerInterval,
-      interval: newGoal.repetition ? newGoal.interval : null,
+      targetPerInterval: selectedGoal
+        ? newGoal.targetPerInterval
+        : newGoal.repetition
+        ? newGoal.targetPerInterval
+        : null,
+      interval: selectedGoal
+        ? newGoal.interval
+        : newGoal.repetition
+        ? newGoal.interval
+        : null,
       deadline: newGoal.deadlineVisible ? newGoal.deadline : null,
       creationDate: new Date().toLocaleDateString(),
     };
@@ -78,8 +87,6 @@ export default function HomePage({ goals, categoryColors }) {
     }));
     setIsModalOpen(false);
     event.target.reset();
-    console.log([...newGoal.myNewGoals, myNewGoal]);
-    console.log(myNewGoal);
   };
 
   useEffect(() => {

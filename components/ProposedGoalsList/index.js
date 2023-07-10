@@ -11,7 +11,7 @@ const StyledList = styled.div`
 const StyledCard = styled.article`
   padding: 20px;
   border-radius: 15px;
-  background-color: ${(props) => props.backgroundColor};
+  background-color: ${(props) => props.backgroundcolor};
   box-shadow: 0 2px 6px rgb(109 94 255 / 10%);
 `;
 
@@ -26,7 +26,7 @@ export default function ProposedGoalsList({
         {goals.map((goal) => (
           <StyledCard
             key={goal.id}
-            backgroundColor={categoryColors[goal.category]}
+            backgroundcolor={categoryColors[goal.category]}
             onClick={() => onOpenModal(goal)}
           >
             <ProposedGoalPreview image={goal.icon} title={goal.name} />
