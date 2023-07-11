@@ -114,18 +114,6 @@ export default function HomePage({ goals, categoryColors }) {
     };
   });
 
-  useEffect(() => {
-    const handleBeforeUnload = () => {
-      localStorage.setItem("newGoal", JSON.stringify(newGoal));
-    };
-
-    window.addEventListener("beforeunload", handleBeforeUnload);
-
-    return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload);
-    };
-  }, [newGoal]);
-
   const closeModal = () => {
     setIsModalOpen(false);
   };
