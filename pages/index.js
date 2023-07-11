@@ -3,6 +3,7 @@ import NewGoalsList from "@/components/NewGoalsList";
 import NewGoalForm from "@/components/NewGoalForm";
 import Button from "@/components/Button";
 import { useState, useEffect } from "react";
+import useLocalStorageState from "use-local-storage-state";
 import { uid } from "uid";
 import styled from "styled-components";
 
@@ -15,14 +16,16 @@ const StyledHeading = styled.h2`
 export default function HomePage({ goals, categoryColors }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedGoal, setSelectedGoal] = useState(null);
-  const [newGoal, setNewGoal] = useState({
-    myGoal: "",
-    repetition: false,
-    targetPerInterval: 1,
-    interval: "day",
-    deadlineVisible: false,
-    deadline: "",
-    myNewGoals: [],
+  const [newGoal, setNewGoal] = useLocalStorageState("newGoal", {
+    defaultValue: {
+      myGoal: "",
+      repetition: false,
+      targetPerInterval: 1,
+      interval: "day",
+      deadlineVisible: false,
+      deadline: "",
+      myNewGoals: [],
+    },
   });
 
   const handleOpenModal = () => {

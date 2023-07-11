@@ -24,7 +24,7 @@ const StyledImage = styled(Image)`
 export default function NewGoalPreview({ image, title, creationDate }) {
   return (
     <StyledCardContent>
-      <StyledImage src={image} alt={title} width={30} height={30} />
+      <StyledImage src={image} alt={title} width={35} height={35} />
       <div>
         <StyledTitle>{title}</StyledTitle>
         <StyledDate>Created on {creationDate}</StyledDate>
