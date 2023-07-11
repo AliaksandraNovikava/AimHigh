@@ -14,7 +14,10 @@ const StyledHeading = styled.h2`
 `;
 
 export default function HomePage({ goals, categoryColors }) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useLocalStorageState(
+    "isModalOpen",
+    false
+  );
   const [selectedGoal, setSelectedGoal] = useState(null);
   const [newGoal, setNewGoal] = useLocalStorageState("newGoal", {
     defaultValue: {
@@ -96,7 +99,10 @@ export default function HomePage({ goals, categoryColors }) {
 
   useEffect(() => {
     const handleEscapeKeyPress = (e) => {
-      if (e.key === "Escape" && isModalOpen) {
+      if (
+        e.key === "Escape" &&
+        localStorage.getItem("isModalOpen") === "true"
+      ) {
         closeModal();
       }
     };
@@ -106,18 +112,22 @@ export default function HomePage({ goals, categoryColors }) {
     return () => {
       document.removeEventListener("keydown", handleEscapeKeyPress);
     };
-  }, [isModalOpen]);
+  });
+
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      localStorage.setItem("newGoal", JSON.stringify(newGoal));
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, [newGoal]);
 
   const closeModal = () => {
     setIsModalOpen(false);
-    setNewGoal(() => ({
-      myGoal: "",
-      repetition: false,
-      targetPerInterval: 1,
-      interval: "day",
-      deadlineVisible: false,
-      deadline: "",
-    }));
   };
 
   return (
