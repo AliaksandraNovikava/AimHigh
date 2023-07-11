@@ -140,10 +140,7 @@ export default function HomePage({ goals, categoryColors }) {
         selectedGoal={selectedGoal}
       />
       <StyledHeading>My Goals</StyledHeading>
-      <NewGoalsList
-        newGoalsEntries={newGoal.myNewGoals}
-        categoryColors={categoryColors}
-      />
+      <NewGoalsList newGoalsEntries={newGoal.myNewGoals} />
     </>
   );
 }
