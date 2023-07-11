@@ -99,10 +99,7 @@ export default function HomePage({ goals, categoryColors }) {
 
   useEffect(() => {
     const handleEscapeKeyPress = (e) => {
-      if (
-        e.key === "Escape" &&
-        localStorage.getItem("isModalOpen") === "true"
-      ) {
+      if (e.key === "Escape" && isModalOpen) {
         closeModal();
       }
     };

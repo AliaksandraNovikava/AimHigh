@@ -15,18 +15,16 @@ const StyledCard = styled.article`
 
 export default function NewGoalsList({ newGoalsEntries }) {
   return (
-    <>
-      <StyledList>
-        {newGoalsEntries.map((goal) => (
-          <StyledCard key={goal.id}>
-            <NewGoalPreview
-              image={goal.icon}
-              title={goal.name}
-              creationDate={goal.creationDate}
-            />
-          </StyledCard>
-        ))}
-      </StyledList>
-    </>
+    <StyledList>
+      {newGoalsEntries.map((goal) => (
+        <StyledCard key={goal.id}>
+          <NewGoalPreview
+            image={goal.icon}
+            title={goal.name}
+            creationDate={goal.creationDate}
+          />
+        </StyledCard>
+      ))}
+    </StyledList>
   );
 }
