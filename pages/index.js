@@ -1,4 +1,5 @@
 import ProposedGoalsList from "@/components/ProposedGoalsList";
+import NewGoalsList from "@/components/NewGoalsList";
 import NewGoalForm from "@/components/NewGoalForm";
 import Button from "@/components/Button";
 import { useState, useEffect } from "react";
@@ -62,6 +63,7 @@ export default function HomePage({ goals, categoryColors }) {
     event.preventDefault();
     const myNewGoal = {
       id: uid(),
+      icon: selectedGoal ? selectedGoal.icon : "/icons/icons8-bullseye-48.png",
       name: selectedGoal ? selectedGoal.description : newGoal.myGoal,
       targetPerInterval: selectedGoal
         ? newGoal.targetPerInterval
@@ -133,6 +135,11 @@ export default function HomePage({ goals, categoryColors }) {
         handleTargetPerIntervalChange={handleTargetPerIntervalChange}
         handleAddGoal={handleAddGoal}
         selectedGoal={selectedGoal}
+      />
+      <StyledHeading>My Goals</StyledHeading>
+      <NewGoalsList
+        newGoalsEntries={newGoal.myNewGoals}
+        categoryColors={categoryColors}
       />
     </>
   );

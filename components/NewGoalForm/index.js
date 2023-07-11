@@ -119,6 +119,7 @@ export default function NewGoalForm({
                       id="newGoalInput"
                       value={newGoal.myGoal}
                       onChange={handleInputChange}
+                      required
                     />
                   </div>
                   <div>
