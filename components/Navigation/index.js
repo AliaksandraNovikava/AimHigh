@@ -14,7 +14,7 @@ const NavBar = styled.nav`
   bottom: 0;
   left: 0;
   right: 0;
-  gap: 52px;
+  gap: 75px;
   justify-content: center;
 `;
 
