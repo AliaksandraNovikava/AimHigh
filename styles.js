@@ -10,7 +10,7 @@ export default createGlobalStyle`
   body {
     margin: 0;
     font-family: system-ui;
-    padding: 0 25px;
+    padding: 0 25px 90px;
     background-color: #fdfbfb;
   }
 `;

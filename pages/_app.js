@@ -3,6 +3,7 @@ import { goals, categoryColors } from "../lib/data.js";
 import { useState, useEffect } from "react";
 import useLocalStorageState from "use-local-storage-state";
 import { uid } from "uid";
+import Navigation from "@/components/Navigation";
 
 export default function App({ Component, pageProps }) {
   const [isModalOpen, setIsModalOpen] = useLocalStorageState(
@@ -123,6 +124,7 @@ export default function App({ Component, pageProps }) {
         handleAddGoal={handleAddGoal}
         selectedGoal={selectedGoal}
       />
+      <Navigation />
     </>
   );
 }
