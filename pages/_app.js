@@ -1,5 +1,5 @@
-import GlobalStyle from "../styles";
-import { goals, categoryColors } from "../lib/data.js";
+import GlobalStyle from "@/styles";
+import { goals, categoryColors } from "@/lib/data.js";
 import { useState, useEffect } from "react";
 import useLocalStorageState from "use-local-storage-state";
 import { uid } from "uid";

@@ -9,18 +9,17 @@ const NavBar = styled.nav`
   background-color: #fff;
   box-shadow: 0px -1px 0px rgba(58, 72, 80, 0.07),
     0px -2px 11px -1px rgba(176, 189, 197, 0.12);
-  padding: 15px 0 13px;
+  padding: 13px 0;
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
-  gap: 75px;
-  justify-content: center;
+  justify-content: space-evenly;
 `;
 
 const StyledIconBox = styled(Link)`
   transition: all 0.1s ease-in-out;
-  font-size: 11px;
+  font-size: 0.8rem;
   line-height: 12px;
   color: #0f0f0f;
   cursor: pointer;
