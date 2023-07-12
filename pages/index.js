@@ -1,10 +1,9 @@
 import ProposedGoalsList from "@/components/ProposedGoalsList";
-import NewGoalsList from "@/components/NewGoalsList";
 import NewGoalForm from "@/components/NewGoalForm";
 import Button from "@/components/Button";
 import styled from "styled-components";
 
-const StyledHeading = styled.h2`
+export const StyledHeading = styled.h2`
   font-size: 21px;
   font-weight: 500;
   line-height: 1.5;
@@ -42,8 +41,6 @@ export default function ProposedGoalsListPage({
         handleAddGoal={handleAddGoal}
         selectedGoal={selectedGoal}
       />
-      <StyledHeading>My Goals</StyledHeading>
-      <NewGoalsList newGoalsEntries={newGoal.myNewGoals} />
     </>
   );
 }
