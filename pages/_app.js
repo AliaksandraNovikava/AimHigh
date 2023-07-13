@@ -118,6 +118,8 @@ export default function App({ Component, pageProps }) {
       myNewGoals: updatedGoalsArray,
     }));
   }
+
+  console.log(newGoal.myNewGoals);
   return (
     <>
       <GlobalStyle />

@@ -24,6 +24,7 @@ export default function NewGoalsList({ newGoalsEntries, handleToggleChecked }) {
             creationDate={goal.creationDate}
             handleToggleChecked={handleToggleChecked}
             id={goal.id}
+            isChecked={goal.isChecked}
           />
         </StyledCard>
       ))}

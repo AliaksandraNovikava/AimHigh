@@ -1,7 +1,7 @@
 import Image from "next/image";
 import styled from "styled-components";
 import Icon from "@mdi/react";
-import { mdiCheckCircleOutline } from "@mdi/js";
+import { mdiCheckCircleOutline, mdiCheckCircle } from "@mdi/js";
 
 const StyledTitle = styled.p`
   margin: 0;
@@ -32,9 +32,6 @@ const StyledImage = styled(Image)`
 const StyledIconBox = styled.div`
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
-  :active {
-    transform: scale(0.95);
-  }
 `;
 
 export default function NewGoalPreview({
@@ -42,6 +39,7 @@ export default function NewGoalPreview({
   title,
   creationDate,
   id,
+  isChecked,
   handleToggleChecked,
 }) {
   return (
@@ -54,7 +52,11 @@ export default function NewGoalPreview({
         </div>
       </StyledCardContent>
       <StyledIconBox onClick={() => handleToggleChecked(id)}>
-        <Icon path={mdiCheckCircleOutline} size={1.1} color="#aeaeae" />
+        {isChecked ? (
+          <Icon path={mdiCheckCircle} size={1.1} color="#aeaeae" />
+        ) : (
+          <Icon path={mdiCheckCircleOutline} size={1.1} color="#aeaeae" />
+        )}
       </StyledIconBox>
     </StyledBox>
   );
