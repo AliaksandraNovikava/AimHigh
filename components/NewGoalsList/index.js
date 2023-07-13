@@ -13,7 +13,7 @@ const StyledCard = styled.article`
   box-shadow: 0 2px 6px rgb(109 94 255 / 10%);
 `;
 
-export default function NewGoalsList({ newGoalsEntries }) {
+export default function NewGoalsList({ newGoalsEntries, handleToggleChecked }) {
   return (
     <StyledList>
       {newGoalsEntries.map((goal) => (
@@ -22,6 +22,8 @@ export default function NewGoalsList({ newGoalsEntries }) {
             image={goal.icon}
             title={goal.name}
             creationDate={goal.creationDate}
+            handleToggleChecked={handleToggleChecked}
+            id={goal.id}
           />
         </StyledCard>
       ))}

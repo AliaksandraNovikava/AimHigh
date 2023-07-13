@@ -107,6 +107,17 @@ export default function App({ Component, pageProps }) {
     setIsModalOpen(false);
   };
 
+  function handleToggleChecked(id) {
+    const myGoalsArray = newGoal.myNewGoals;
+    const updatedGoalsArray = myGoalsArray.map((goal) =>
+      goal.id === id ? { ...goal, isChecked: !goal.isChecked } : goal
+    );
+
+    setNewGoal((prevGoal) => ({
+      ...prevGoal,
+      myNewGoals: updatedGoalsArray,
+    }));
+  }
   return (
     <>
       <GlobalStyle />
@@ -123,6 +134,7 @@ export default function App({ Component, pageProps }) {
         handleTargetPerIntervalChange={handleTargetPerIntervalChange}
         handleAddGoal={handleAddGoal}
         selectedGoal={selectedGoal}
+        handleToggleChecked={handleToggleChecked}
       />
       <Navigation />
     </>
