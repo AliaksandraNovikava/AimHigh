@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import NewGoalPreview from "../NewGoalPreview";
 
-const StyledList = styled.div`
+export const StyledList = styled.div`
   padding-bottom: 25px;
 `;
 
-const StyledCard = styled.article`
+export const StyledCard = styled.article`
   padding: 15px;
   margin-bottom: 15px;
   border-radius: 15px;

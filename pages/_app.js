@@ -22,6 +22,7 @@ export default function App({ Component, pageProps }) {
       myNewGoals: [],
     },
   });
+  const myGoalsArray = newGoal.myNewGoals;
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -108,7 +109,6 @@ export default function App({ Component, pageProps }) {
   };
 
   function handleToggleChecked(id) {
-    const myGoalsArray = newGoal.myNewGoals;
     const updatedGoalsArray = myGoalsArray.map((goal) =>
       goal.id === id ? { ...goal, isChecked: !goal.isChecked } : goal
     );
@@ -118,8 +118,10 @@ export default function App({ Component, pageProps }) {
       myNewGoals: updatedGoalsArray,
     }));
   }
-
   console.log(newGoal.myNewGoals);
+  const checkedGoals = myGoalsArray.filter((goal) => goal.isChecked);
+  console.log(checkedGoals);
+
   return (
     <>
       <GlobalStyle />
@@ -128,6 +130,7 @@ export default function App({ Component, pageProps }) {
         goals={goals}
         categoryColors={categoryColors}
         newGoal={newGoal}
+        checkedGoals={checkedGoals}
         isModalOpen={isModalOpen}
         closeModal={closeModal}
         handleOpenModal={handleOpenModal}
