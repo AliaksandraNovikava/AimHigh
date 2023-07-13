@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import Link from "next/link";
 import Icon from "@mdi/react";
-import { mdiPlusCircle } from "@mdi/js";
-import { mdiBullseyeArrow } from "@mdi/js";
+import { mdiPlusCircle, mdiBullseyeArrow, mdiTrophy } from "@mdi/js";
 
 const NavBar = styled.nav`
   display: flex;
@@ -24,6 +23,7 @@ const StyledIconBox = styled(Link)`
   color: #0f0f0f;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
+  width: 25%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -44,6 +44,10 @@ export default function Navigation() {
         <StyledIconBox href="/my-goals" area-label="view all my goals">
           <Icon path={mdiBullseyeArrow} size={1.3} color="#000" />
           My Goals
+        </StyledIconBox>
+        <StyledIconBox href="/achievements" area-label="view all my goals">
+          <Icon path={mdiTrophy} size={1.3} color="#000" />
+          Achievements
         </StyledIconBox>
       </NavBar>
     </>
