@@ -22,7 +22,6 @@ export default function App({ Component, pageProps }) {
       myNewGoals: [],
     },
   });
-  const myGoalsArray = newGoal.myNewGoals;
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -118,9 +117,9 @@ export default function App({ Component, pageProps }) {
       myNewGoals: updatedGoalsArray,
     }));
   }
-  console.log(newGoal.myNewGoals);
+
+  const myGoalsArray = newGoal.myNewGoals;
   const checkedGoals = myGoalsArray.filter((goal) => goal.isChecked);
-  console.log(checkedGoals);
 
   return (
     <>
