@@ -1,7 +1,10 @@
 import { StyledList, StyledCard } from "@/components/NewGoalsList/index.js";
 import NewGoalPreview from "../NewGoalPreview";
 
-export default function AchievementsList({ checkedGoals }) {
+export default function AchievementsList({
+  checkedGoals,
+  handleToggleChecked,
+}) {
   return (
     <StyledList>
       {checkedGoals.map((goal) => (
@@ -12,6 +15,7 @@ export default function AchievementsList({ checkedGoals }) {
             creationDate={goal.creationDate}
             id={goal.id}
             isChecked={goal.isChecked}
+            handleToggleChecked={handleToggleChecked}
           />
         </StyledCard>
       ))}

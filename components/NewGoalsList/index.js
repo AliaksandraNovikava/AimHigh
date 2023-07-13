@@ -14,9 +14,10 @@ export const StyledCard = styled.article`
 `;
 
 export default function NewGoalsList({ newGoalsEntries, handleToggleChecked }) {
+  const uncheckedGoals = newGoalsEntries.filter((goal) => !goal.isChecked);
   return (
     <StyledList>
-      {newGoalsEntries.map((goal) => (
+      {uncheckedGoals.map((goal) => (
         <StyledCard key={goal.id}>
           <NewGoalPreview
             image={goal.icon}
