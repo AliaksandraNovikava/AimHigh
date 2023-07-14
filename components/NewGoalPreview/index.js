@@ -31,6 +31,7 @@ const StyledImage = styled(Image)`
 
 const StyledIconBox = styled.div`
   cursor: pointer;
+  z-index: 10;
   -webkit-tap-highlight-color: transparent;
 `;
 
@@ -41,10 +42,12 @@ export default function NewGoalPreview({
   id,
   isChecked,
   handleToggleChecked,
+  onOpenModal,
+  goal,
 }) {
   return (
     <StyledBox>
-      <StyledCardContent>
+      <StyledCardContent onClick={() => onOpenModal(goal)}>
         <StyledImage src={image} alt={title} width={35} height={35} />
         <div>
           <StyledTitle>{title}</StyledTitle>

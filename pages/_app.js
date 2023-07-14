@@ -33,18 +33,34 @@ export default function App({ Component, pageProps }) {
     setSelectedGoal(goal);
   };
 
+  // const handleInputChange = (event) => {
+  //   const { name, value, type, checked } = event.target;
+
+  //   if (type === "checkbox") {
+  //     setNewGoal((prevState) => ({
+  //       ...prevState,
+  //       [name]: checked,
+  //     }));
+  //   } else if (name !== "myGoal") {
+  //     setNewGoal((prevState) => ({
+  //       ...prevState,
+  //       [name]: value,
+  //     }));
+  //   } else {
+  //     setNewGoal((prevState) => ({
+  //       ...prevState,
+  //       [name]: value,
+  //       myGoal: value,
+  //     }));
+  //   }
+  // };
+
   const handleInputChange = (event) => {
     const { name, value, type, checked } = event.target;
-
     if (type === "checkbox") {
       setNewGoal((prevState) => ({
         ...prevState,
         [name]: checked,
-      }));
-    } else if (name !== "myGoal") {
-      setNewGoal((prevState) => ({
-        ...prevState,
-        [name]: value,
       }));
     } else {
       setNewGoal((prevState) => ({
@@ -67,7 +83,9 @@ export default function App({ Component, pageProps }) {
     const myNewGoal = {
       id: uid(),
       icon: selectedGoal ? selectedGoal.icon : "/icons/icons8-bullseye-48.png",
-      name: selectedGoal ? selectedGoal.description : newGoal.myGoal,
+      name: selectedGoal
+        ? selectedGoal.description
+        : `I want to ${newGoal.myGoal}`,
       targetPerInterval: selectedGoal
         ? newGoal.targetPerInterval
         : newGoal.repetition

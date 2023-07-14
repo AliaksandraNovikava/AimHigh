@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Image from "next/image";
 import Button from "../Button";
 
-const StyledModalBody = styled.section`
+export const StyledModalBody = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -10,7 +10,7 @@ const StyledModalBody = styled.section`
   /* position: relative; */
 `;
 
-const StyledModal = styled.section`
+export const StyledModal = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -27,7 +27,7 @@ const StyledModal = styled.section`
   z-index: 10;
 `;
 
-const StyledOverlay = styled.section`
+export const StyledOverlay = styled.section`
   position: fixed;
   top: 0;
   bottom: 0;
