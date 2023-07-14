@@ -41,6 +41,11 @@ export default function App({ Component, pageProps }) {
         ...prevState,
         [name]: checked,
       }));
+    } else if (name !== "myGoal") {
+      setNewGoal((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
     } else {
       setNewGoal((prevState) => ({
         ...prevState,
@@ -105,7 +110,30 @@ export default function App({ Component, pageProps }) {
 
   const closeModal = () => {
     setIsModalOpen(false);
+    setNewGoal((prevGoal) => ({
+      ...prevGoal,
+      myGoal: "",
+      repetition: false,
+      targetPerInterval: 1,
+      interval: "day",
+      deadlineVisible: false,
+      deadline: "",
+    }));
   };
+
+  function handleToggleChecked(id) {
+    const updatedGoalsArray = myGoalsArray.map((goal) =>
+      goal.id === id ? { ...goal, isChecked: !goal.isChecked } : goal
+    );
+
+    setNewGoal((prevGoal) => ({
+      ...prevGoal,
+      myNewGoals: updatedGoalsArray,
+    }));
+  }
+
+  const myGoalsArray = newGoal.myNewGoals;
+  const checkedGoals = myGoalsArray.filter((goal) => goal.isChecked);
 
   return (
     <>
@@ -115,6 +143,7 @@ export default function App({ Component, pageProps }) {
         goals={goals}
         categoryColors={categoryColors}
         newGoal={newGoal}
+        checkedGoals={checkedGoals}
         isModalOpen={isModalOpen}
         closeModal={closeModal}
         handleOpenModal={handleOpenModal}
@@ -123,6 +152,7 @@ export default function App({ Component, pageProps }) {
         handleTargetPerIntervalChange={handleTargetPerIntervalChange}
         handleAddGoal={handleAddGoal}
         selectedGoal={selectedGoal}
+        handleToggleChecked={handleToggleChecked}
       />
       <Navigation />
     </>
