@@ -7,20 +7,20 @@ export const StyledModalBody = styled.section`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* position: relative; */
 `;
 
 export const StyledModal = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   text-align: center;
   gap: 0.4rem;
   width: 85%;
   padding: 1.3rem;
   min-height: 250px;
   position: fixed;
-  top: 20%;
+  top: 5%;
   background-color: white;
   border: 1px solid #ddd;
   border-radius: 15px;
@@ -37,6 +37,12 @@ export const StyledOverlay = styled.section`
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
   z-index: 1;
+`;
+
+export const StyledGoalText = styled.p`
+  font-size: 1.2em;
+  font-weight: bold;
+  margin: 0.5em;
 `;
 
 export default function NewGoalForm({
@@ -62,7 +68,7 @@ export default function NewGoalForm({
                     width={40}
                     height={40}
                   />
-                  <p>{selectedGoal.description}</p>
+                  <StyledGoalText>{selectedGoal.description}</StyledGoalText>
                   <div>
                     <button
                       type="button"

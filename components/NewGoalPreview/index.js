@@ -10,7 +10,7 @@ const StyledTitle = styled.p`
 const StyledDate = styled.p`
   margin-bottom: 0;
   margin-top: 10px;
-  font-size: 12px;
+  font-size: 0.7em;
   color: #8e8e93;
 `;
 
