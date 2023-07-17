@@ -21,6 +21,7 @@ const StyledBox = styled.div`
 `;
 
 const StyledCardContent = styled.div`
+  width: 85%;
   display: flex;
   align-items: center;
 `;
@@ -30,6 +31,7 @@ const StyledImage = styled(Image)`
 `;
 
 const StyledIconBox = styled.div`
+  width: 15%;
   cursor: pointer;
   z-index: 10;
   -webkit-tap-highlight-color: transparent;
