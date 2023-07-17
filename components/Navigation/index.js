@@ -14,6 +14,7 @@ const NavBar = styled.nav`
   left: 0;
   right: 0;
   justify-content: space-evenly;
+  z-index: 20;
 `;
 
 const StyledIconBox = styled(Link)`
