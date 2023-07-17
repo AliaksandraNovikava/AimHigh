@@ -32,6 +32,7 @@ const StyledImage = styled(Image)`
 
 const StyledIconBox = styled.div`
   width: 15%;
+  text-align: end;
   cursor: pointer;
   z-index: 10;
   -webkit-tap-highlight-color: transparent;
