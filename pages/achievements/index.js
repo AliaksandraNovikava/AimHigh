@@ -9,6 +9,7 @@ export default function MyGoalsOPage({
   isModalOpen,
   closeModal,
   handleOpenModalFromListItem,
+  handleDeleteGoal,
   selectedGoal,
 }) {
   return (
@@ -24,6 +25,7 @@ export default function MyGoalsOPage({
         isModalOpen={isModalOpen}
         closeModal={closeModal}
         selectedGoal={selectedGoal}
+        onDeleteGoal={handleDeleteGoal}
       />
     </>
   );

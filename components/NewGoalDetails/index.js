@@ -9,6 +9,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
+import Button from "@/components/Button";
 
 const StyledCalendar = styled.section`
   margin-top: 15px;
@@ -45,6 +46,7 @@ export default function NewGoalDetails({
   isModalOpen,
   closeModal,
   selectedGoal,
+  onDeleteGoal,
 }) {
   const initialDays = [];
   const [days, setDays] = useState(initialDays);
@@ -62,7 +64,7 @@ export default function NewGoalDetails({
     <>
       {isModalOpen && (
         <StyledModalBody>
-          <StyledModal className="goalModal" hidden>
+          <StyledModal position="absolute" top="5%" hidden>
             {selectedGoal && (
               <>
                 <StyledCloseButton onClick={closeModal}>⨉</StyledCloseButton>
@@ -97,6 +99,9 @@ export default function NewGoalDetails({
                     Deadline: {selectedGoal.deadline}
                   </StyledDeadlineBox>
                 )}
+                <Button onClick={() => onDeleteGoal(selectedGoal.id)}>
+                  Delete
+                </Button>
               </>
             )}
           </StyledModal>

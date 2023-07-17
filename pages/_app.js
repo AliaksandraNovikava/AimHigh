@@ -3,6 +3,8 @@ import { goals, categoryColors } from "@/lib/data.js";
 import { useState, useEffect } from "react";
 import useLocalStorageState from "use-local-storage-state";
 import { uid } from "uid";
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
 import Navigation from "@/components/Navigation";
 
 export default function App({ Component, pageProps }) {
@@ -137,6 +139,32 @@ export default function App({ Component, pageProps }) {
   const myGoalsArray = newGoal.myNewGoals;
   const checkedGoals = myGoalsArray.filter((goal) => goal.isChecked);
 
+  function handleDelete(id) {
+    const remainedGoals = myGoalsArray.filter((goal) => goal.id !== id);
+    setNewGoal((prevGoal) => ({
+      ...prevGoal,
+      myNewGoals: remainedGoals,
+    }));
+    setIsModalOpen(false);
+  }
+
+  function handleDeleteGoal(id) {
+    confirmAlert({
+      title: "Are you sure?",
+      message: "Do you want to delete this goal?",
+      buttons: [
+        {
+          label: "No",
+          onClick: () => close(),
+        },
+        {
+          label: "Yes",
+          onClick: () => handleDelete(id),
+        },
+      ],
+    });
+  }
+
   return (
     <>
       <GlobalStyle />
@@ -156,6 +184,7 @@ export default function App({ Component, pageProps }) {
         selectedGoal={selectedGoal}
         handleToggleChecked={handleToggleChecked}
         handleUserInput={handleUserInput}
+        handleDeleteGoal={handleDeleteGoal}
       />
       <Navigation />
     </>
