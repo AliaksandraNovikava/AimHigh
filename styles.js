@@ -25,4 +25,10 @@ export default createGlobalStyle`
   --rdp-outline-selected: 3px solid var(--rdp-accent-color); /* Outline border for focused _and_ selected elements */
   margin: 1em 0.3em 0;
 }
+.react-confirm-alert-body {
+  width :100%;
+}
+.react-confirm-alert-blur{
+  filter: none;
+} 
 `;

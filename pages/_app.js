@@ -151,7 +151,7 @@ export default function App({ Component, pageProps }) {
   function handleDeleteGoal(id) {
     confirmAlert({
       title: "Are you sure?",
-      message: "Are you sure to delete this goal.",
+      message: "Do you want to delete this goal?",
       buttons: [
         {
           label: "No",

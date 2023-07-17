@@ -18,7 +18,7 @@ export const StyledModal = styled.section`
   position: ${(props) => props.position};
   top: ${(props) => props.top};
   gap: 0.4rem;
-  width: 85%;
+  width: 330px;
   padding: 1.3rem;
   min-height: 250px;
   background-color: white;
