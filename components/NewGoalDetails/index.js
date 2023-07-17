@@ -62,7 +62,7 @@ export default function NewGoalDetails({
     <>
       {isModalOpen && (
         <StyledModalBody>
-          <StyledModal className="goalModal" hidden>
+          <StyledModal position="absolute" top="5%" hidden>
             {selectedGoal && (
               <>
                 <StyledCloseButton onClick={closeModal}>⨉</StyledCloseButton>

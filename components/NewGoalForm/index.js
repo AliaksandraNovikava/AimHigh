@@ -15,6 +15,8 @@ export const StyledModal = styled.section`
   justify-content: center;
   align-items: center;
   text-align: center;
+  position: ${(props) => props.position};
+  top: ${(props) => props.top};
   gap: 0.4rem;
   width: 85%;
   padding: 1.3rem;
@@ -57,7 +59,7 @@ export default function NewGoalForm({
     <>
       {isModalOpen && (
         <StyledModalBody>
-          <StyledModal className="formModal" hidden>
+          <StyledModal position="fixed" top="10%" hidden>
             <form onSubmit={handleAddGoal}>
               {selectedGoal ? (
                 <>
