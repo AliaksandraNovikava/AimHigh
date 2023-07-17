@@ -22,7 +22,7 @@ export const StyledModal = styled.section`
   background-color: white;
   border: 1px solid #ddd;
   border-radius: 15px;
-  z-index: 10;
+  z-index: 22;
 `;
 
 export const StyledOverlay = styled.section`
@@ -34,7 +34,7 @@ export const StyledOverlay = styled.section`
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
-  z-index: 1;
+  z-index: 21;
 `;
 
 export const StyledGoalText = styled.p`
