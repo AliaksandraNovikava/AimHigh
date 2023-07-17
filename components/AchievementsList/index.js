@@ -4,6 +4,7 @@ import NewGoalPreview from "../NewGoalPreview";
 export default function AchievementsList({
   checkedGoals,
   handleToggleChecked,
+  onOpenModal,
 }) {
   return (
     <StyledList>
@@ -15,7 +16,9 @@ export default function AchievementsList({
             creationDate={goal.creationDate}
             id={goal.id}
             isChecked={goal.isChecked}
+            onOpenModal={onOpenModal}
             handleToggleChecked={handleToggleChecked}
+            goal={goal}
           />
         </StyledCard>
       ))}

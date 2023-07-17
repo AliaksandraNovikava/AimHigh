@@ -10,7 +10,7 @@ const StyledTitle = styled.p`
 const StyledDate = styled.p`
   margin-bottom: 0;
   margin-top: 10px;
-  font-size: 12px;
+  font-size: 0.7em;
   color: #8e8e93;
 `;
 
@@ -21,6 +21,7 @@ const StyledBox = styled.div`
 `;
 
 const StyledCardContent = styled.div`
+  width: 85%;
   display: flex;
   align-items: center;
 `;
@@ -30,7 +31,10 @@ const StyledImage = styled(Image)`
 `;
 
 const StyledIconBox = styled.div`
+  width: 15%;
+  text-align: end;
   cursor: pointer;
+  z-index: 10;
   -webkit-tap-highlight-color: transparent;
 `;
 
@@ -41,10 +45,12 @@ export default function NewGoalPreview({
   id,
   isChecked,
   handleToggleChecked,
+  onOpenModal,
+  goal,
 }) {
   return (
     <StyledBox>
-      <StyledCardContent>
+      <StyledCardContent onClick={() => onOpenModal(goal)}>
         <StyledImage src={image} alt={title} width={35} height={35} />
         <div>
           <StyledTitle>{title}</StyledTitle>

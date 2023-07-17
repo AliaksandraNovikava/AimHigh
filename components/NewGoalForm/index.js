@@ -2,32 +2,30 @@ import styled from "styled-components";
 import Image from "next/image";
 import Button from "../Button";
 
-const StyledModalBody = styled.section`
+export const StyledModalBody = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* position: relative; */
 `;
 
-const StyledModal = styled.section`
+export const StyledModal = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   text-align: center;
   gap: 0.4rem;
   width: 85%;
   padding: 1.3rem;
   min-height: 250px;
-  position: fixed;
-  top: 20%;
   background-color: white;
   border: 1px solid #ddd;
   border-radius: 15px;
-  z-index: 10;
+  z-index: 22;
 `;
 
-const StyledOverlay = styled.section`
+export const StyledOverlay = styled.section`
   position: fixed;
   top: 0;
   bottom: 0;
@@ -36,7 +34,13 @@ const StyledOverlay = styled.section`
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
-  z-index: 1;
+  z-index: 21;
+`;
+
+export const StyledGoalText = styled.p`
+  font-size: 1.2em;
+  font-weight: bold;
+  margin: 0.5em;
 `;
 
 export default function NewGoalForm({
@@ -47,12 +51,13 @@ export default function NewGoalForm({
   handleTargetPerIntervalChange,
   handleAddGoal,
   selectedGoal,
+  handleUserInput,
 }) {
   return (
     <>
       {isModalOpen && (
         <StyledModalBody>
-          <StyledModal hidden>
+          <StyledModal className="formModal" hidden>
             <form onSubmit={handleAddGoal}>
               {selectedGoal ? (
                 <>
@@ -62,7 +67,7 @@ export default function NewGoalForm({
                     width={40}
                     height={40}
                   />
-                  <p>{selectedGoal.description}</p>
+                  <StyledGoalText>{selectedGoal.description}</StyledGoalText>
                   <div>
                     <button
                       type="button"
@@ -118,7 +123,7 @@ export default function NewGoalForm({
                       type="text"
                       id="newGoalInput"
                       value={newGoal.myGoal}
-                      onChange={handleInputChange}
+                      onChange={(event) => handleUserInput(event)}
                       required
                     />
                   </div>

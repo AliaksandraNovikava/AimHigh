@@ -13,7 +13,11 @@ export const StyledCard = styled.article`
   box-shadow: 0 2px 6px rgb(109 94 255 / 10%);
 `;
 
-export default function NewGoalsList({ newGoalsEntries, handleToggleChecked }) {
+export default function NewGoalsList({
+  newGoalsEntries,
+  handleToggleChecked,
+  onOpenModal,
+}) {
   const uncheckedGoals = newGoalsEntries.filter((goal) => !goal.isChecked);
   return (
     <StyledList>
@@ -26,6 +30,8 @@ export default function NewGoalsList({ newGoalsEntries, handleToggleChecked }) {
             handleToggleChecked={handleToggleChecked}
             id={goal.id}
             isChecked={goal.isChecked}
+            onOpenModal={onOpenModal}
+            goal={goal}
           />
         </StyledCard>
       ))}
