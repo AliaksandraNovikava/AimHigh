@@ -33,28 +33,6 @@ export default function App({ Component, pageProps }) {
     setSelectedGoal(goal);
   };
 
-  // const handleInputChange = (event) => {
-  //   const { name, value, type, checked } = event.target;
-
-  //   if (type === "checkbox") {
-  //     setNewGoal((prevState) => ({
-  //       ...prevState,
-  //       [name]: checked,
-  //     }));
-  //   } else if (name !== "myGoal") {
-  //     setNewGoal((prevState) => ({
-  //       ...prevState,
-  //       [name]: value,
-  //     }));
-  //   } else {
-  //     setNewGoal((prevState) => ({
-  //       ...prevState,
-  //       [name]: value,
-  //       myGoal: value,
-  //     }));
-  //   }
-  // };
-
   const handleInputChange = (event) => {
     const { name, value, type, checked } = event.target;
     if (type === "checkbox") {
@@ -66,10 +44,16 @@ export default function App({ Component, pageProps }) {
       setNewGoal((prevState) => ({
         ...prevState,
         [name]: value,
-        myGoal: value,
       }));
     }
   };
+
+  function handleUserInput(event) {
+    setNewGoal({
+      ...newGoal,
+      myGoal: event.target.value,
+    });
+  }
 
   const handleTargetPerIntervalChange = (value) => {
     setNewGoal((prevState) => ({
@@ -171,6 +155,7 @@ export default function App({ Component, pageProps }) {
         handleAddGoal={handleAddGoal}
         selectedGoal={selectedGoal}
         handleToggleChecked={handleToggleChecked}
+        handleUserInput={handleUserInput}
       />
       <Navigation />
     </>

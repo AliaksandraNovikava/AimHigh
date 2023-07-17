@@ -15,7 +15,7 @@ export default createGlobalStyle`
   }
 
   .rdp {
-  --rdp-cell-size: 33px;
+  --rdp-cell-size: 35px;
   --rdp-caption-font-size: 14px;
   --rdp-accent-color: #000;
   --rdp-background-color: #e7edff;
@@ -23,6 +23,14 @@ export default createGlobalStyle`
   --rdp-background-color-dark: #180270;
   --rdp-outline: 2px solid var(--rdp-accent-color); /* Outline border for focused elements */
   --rdp-outline-selected: 3px solid var(--rdp-accent-color); /* Outline border for focused _and_ selected elements */
-  margin: 1em 1em 0;
+  margin: 1em 0.3em 0;
 }
+.formModal {
+    position: fixed;
+    top: 10%;
+  }
+  .goalModal {
+    position: absolute;
+    top: 5%;
+  }
 `;

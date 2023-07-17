@@ -21,6 +21,7 @@ export default function ProposedGoalsListPage({
   handleInputChange,
   handleTargetPerIntervalChange,
   handleAddGoal,
+  handleUserInput,
 }) {
   return (
     <>
@@ -40,6 +41,7 @@ export default function ProposedGoalsListPage({
         handleTargetPerIntervalChange={handleTargetPerIntervalChange}
         handleAddGoal={handleAddGoal}
         selectedGoal={selectedGoal}
+        handleUserInput={handleUserInput}
       />
     </>
   );

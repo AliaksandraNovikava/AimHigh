@@ -22,7 +22,22 @@ const StyledDescription = styled.p`
   font-size: 0.8em;
   font-style: italic;
   color: #8e8e93;
-  margin: 20px 0;
+  margin: 20px 10px;
+`;
+
+const StyledCloseButton = styled.span`
+  position: absolute;
+  top: 10px;
+  right: 15px;
+`;
+
+const StyledDeadlineBox = styled.div`
+  font-size: 11px;
+  padding: 10px 23px;
+  border: solid 1px #000;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 1em;
 `;
 
 export default function NewGoalDetails({
@@ -31,9 +46,6 @@ export default function NewGoalDetails({
   closeModal,
   selectedGoal,
 }) {
-  console.log("details", newGoalsEntries);
-  console.log("selected goal", selectedGoal);
-  //   const { icon, name, targetPerInterval, interval, deadline } = selectedGoal;
   const initialDays = [];
   const [days, setDays] = useState(initialDays);
 
@@ -50,9 +62,10 @@ export default function NewGoalDetails({
     <>
       {isModalOpen && (
         <StyledModalBody>
-          <StyledModal hidden>
+          <StyledModal className="goalModal" hidden>
             {selectedGoal && (
               <>
+                <StyledCloseButton onClick={closeModal}>⨉</StyledCloseButton>
                 <Image
                   src={selectedGoal.icon}
                   alt={selectedGoal.name}
@@ -62,7 +75,7 @@ export default function NewGoalDetails({
                 <StyledGoalText>{selectedGoal.name}</StyledGoalText>
                 {selectedGoal.interval && (
                   <>
-                    {selectedGoal.targetPerInterval} times a{" "}
+                    {selectedGoal.targetPerInterval} time(s) a{" "}
                     {selectedGoal.interval}
                     <StyledCalendar>
                       <StyledDescription>
@@ -78,6 +91,11 @@ export default function NewGoalDetails({
                       />
                     </StyledCalendar>
                   </>
+                )}
+                {selectedGoal.deadline && (
+                  <StyledDeadlineBox>
+                    Deadline: {selectedGoal.deadline}
+                  </StyledDeadlineBox>
                 )}
               </>
             )}

@@ -19,8 +19,6 @@ export const StyledModal = styled.section`
   width: 85%;
   padding: 1.3rem;
   min-height: 250px;
-  position: fixed;
-  top: 5%;
   background-color: white;
   border: 1px solid #ddd;
   border-radius: 15px;
@@ -53,12 +51,13 @@ export default function NewGoalForm({
   handleTargetPerIntervalChange,
   handleAddGoal,
   selectedGoal,
+  handleUserInput,
 }) {
   return (
     <>
       {isModalOpen && (
         <StyledModalBody>
-          <StyledModal hidden>
+          <StyledModal className="formModal" hidden>
             <form onSubmit={handleAddGoal}>
               {selectedGoal ? (
                 <>
@@ -124,7 +123,7 @@ export default function NewGoalForm({
                       type="text"
                       id="newGoalInput"
                       value={newGoal.myGoal}
-                      onChange={handleInputChange}
+                      onChange={(event) => handleUserInput(event)}
                       required
                     />
                   </div>
