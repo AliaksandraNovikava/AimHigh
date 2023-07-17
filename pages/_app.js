@@ -137,6 +137,15 @@ export default function App({ Component, pageProps }) {
   const myGoalsArray = newGoal.myNewGoals;
   const checkedGoals = myGoalsArray.filter((goal) => goal.isChecked);
 
+  function handleDeleteGoal(id) {
+    const remainedGoals = myGoalsArray.filter((goal) => goal.id !== id);
+    setNewGoal((prevGoal) => ({
+      ...prevGoal,
+      myNewGoals: remainedGoals,
+    }));
+    setIsModalOpen(false);
+  }
+
   return (
     <>
       <GlobalStyle />
@@ -156,6 +165,7 @@ export default function App({ Component, pageProps }) {
         selectedGoal={selectedGoal}
         handleToggleChecked={handleToggleChecked}
         handleUserInput={handleUserInput}
+        handleDeleteGoal={handleDeleteGoal}
       />
       <Navigation />
     </>
