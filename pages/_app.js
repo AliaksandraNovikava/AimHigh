@@ -12,7 +12,10 @@ export default function App({ Component, pageProps }) {
     "isModalOpen",
     false
   );
-  const [selectedGoal, setSelectedGoal] = useState(null);
+  const [selectedGoal, setSelectedGoal] = useLocalStorageState(
+    "selected Goal",
+    null
+  );
   const [newGoal, setNewGoal] = useLocalStorageState("newGoal", {
     defaultValue: {
       myGoal: "",
@@ -24,6 +27,7 @@ export default function App({ Component, pageProps }) {
       myNewGoals: [],
     },
   });
+  const [isEditing, setIsEditing] = useState(false);
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -165,6 +169,35 @@ export default function App({ Component, pageProps }) {
     });
   }
 
+  function handleEditChange(event) {
+    const { name, value } = event.target;
+
+    setSelectedGoal((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  }
+
+  function handleSaveEdit() {
+    const updatedGoal = {
+      ...selectedGoal,
+      targetPerInterval: selectedGoal.targetPerInterval,
+      interval: selectedGoal.interval,
+      deadline: selectedGoal.deadline,
+    };
+    setSelectedGoal(updatedGoal);
+
+    // const updatedGoals = goals.map((goal) =>
+    //   goal.id === selectedGoal.id ? updatedGoal : goal
+    // );
+
+    // setNewGoal((prevGoal) => ({
+    //   ...prevGoal,
+    //   myNewGoals: updatedGoals,
+    // }));
+    setIsEditing(false);
+  }
+
   return (
     <>
       <GlobalStyle />
@@ -185,6 +218,8 @@ export default function App({ Component, pageProps }) {
         handleToggleChecked={handleToggleChecked}
         handleUserInput={handleUserInput}
         handleDeleteGoal={handleDeleteGoal}
+        handleEditChange={handleEditChange}
+        handleSaveEdit={handleSaveEdit}
       />
       <Navigation />
     </>
