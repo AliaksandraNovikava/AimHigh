@@ -41,12 +41,25 @@ const StyledDeadlineBox = styled.div`
   font-size: 1em;
 `;
 
+const StyledButtonsBox = styled.div`
+  display: flex;
+  gap: 30px;
+`;
+
+const StyledInput = styled.input`
+  width: 50px;
+`;
+
 export default function NewGoalDetails({
-  newGoalsEntries,
   isModalOpen,
   closeModal,
   selectedGoal,
   onDeleteGoal,
+  onEditGoal,
+  onSaveEdit,
+  onCancelEdit,
+  onEdit,
+  isEditing,
 }) {
   const initialDays = [];
   const [days, setDays] = useState(initialDays);
@@ -59,6 +72,96 @@ export default function NewGoalDetails({
     ) : (
       <StyledDescription>Please pick one or more days.</StyledDescription>
     );
+
+  let goalContent;
+  let goalDeadline;
+  let editButtons;
+
+  if (selectedGoal && isEditing) {
+    goalContent = (
+      <>
+        <div>
+          <StyledInput
+            type="number"
+            name="targetPerInterval"
+            value={selectedGoal.targetPerInterval}
+            onChange={onEditGoal}
+          />
+          <span> time(s) a </span>
+          <select
+            name="interval"
+            value={selectedGoal.interval}
+            onChange={onEditGoal}
+          >
+            <option value="day">Day</option>
+            <option value="week">Week</option>
+            <option value="month">Month</option>
+          </select>
+        </div>
+        <StyledCalendar>
+          <StyledDescription>
+            Mark the days when you did something to achieve your goal.
+          </StyledDescription>
+          <DayPicker
+            mode="multiple"
+            min={1}
+            selected={days}
+            onSelect={setDays}
+            footer={footer}
+          />
+        </StyledCalendar>
+      </>
+    );
+    goalDeadline = (
+      <StyledDeadlineBox>
+        Deadline:
+        <input
+          name="deadline"
+          type="date"
+          value={selectedGoal.deadline}
+          onChange={onEditGoal}
+        />
+      </StyledDeadlineBox>
+    );
+    editButtons = (
+      <StyledButtonsBox>
+        <Button onClick={onSaveEdit}>Save</Button>
+        <Button onClick={onCancelEdit}>Cancel</Button>
+      </StyledButtonsBox>
+    );
+  } else if (selectedGoal) {
+    goalContent = (
+      <>
+        {selectedGoal.targetPerInterval} time(s) a {selectedGoal.interval}
+        <StyledCalendar>
+          <StyledDescription>
+            Mark the days when you did something to achieve your goal.
+          </StyledDescription>
+          <DayPicker
+            mode="multiple"
+            min={1}
+            selected={days}
+            onSelect={setDays}
+            footer={footer}
+          />
+        </StyledCalendar>
+      </>
+    );
+    goalDeadline = (
+      <StyledDeadlineBox>Deadline: {selectedGoal.deadline}</StyledDeadlineBox>
+    );
+    editButtons = (
+      <StyledButtonsBox>
+        {(selectedGoal.interval || selectedGoal.deadline) && (
+          <Button onClick={onEdit}>Edit</Button>
+        )}
+        <Button onClick={() => onDeleteGoal(selectedGoal.id)}>Delete</Button>
+      </StyledButtonsBox>
+    );
+  } else {
+    goalContent = null;
+    goalDeadline = null;
+  }
 
   return (
     <>
@@ -75,33 +178,9 @@ export default function NewGoalDetails({
                   height={40}
                 />
                 <StyledGoalText>{selectedGoal.name}</StyledGoalText>
-                {selectedGoal.interval && (
-                  <>
-                    {selectedGoal.targetPerInterval} time(s) a{" "}
-                    {selectedGoal.interval}
-                    <StyledCalendar>
-                      <StyledDescription>
-                        Mark the days when you did something to achieve your
-                        goal.
-                      </StyledDescription>
-                      <DayPicker
-                        mode="multiple"
-                        min={1}
-                        selected={days}
-                        onSelect={setDays}
-                        footer={footer}
-                      />
-                    </StyledCalendar>
-                  </>
-                )}
-                {selectedGoal.deadline && (
-                  <StyledDeadlineBox>
-                    Deadline: {selectedGoal.deadline}
-                  </StyledDeadlineBox>
-                )}
-                <Button onClick={() => onDeleteGoal(selectedGoal.id)}>
-                  Delete
-                </Button>
+                {selectedGoal.interval && <>{goalContent}</>}
+                {selectedGoal.deadline && <>{goalDeadline}</>}
+                {editButtons}
               </>
             )}
           </StyledModal>

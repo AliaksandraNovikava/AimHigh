@@ -12,7 +12,10 @@ export default function App({ Component, pageProps }) {
     "isModalOpen",
     false
   );
-  const [selectedGoal, setSelectedGoal] = useState(null);
+  const [selectedGoal, setSelectedGoal] = useLocalStorageState(
+    "selected Goal",
+    null
+  );
   const [newGoal, setNewGoal] = useLocalStorageState("newGoal", {
     defaultValue: {
       myGoal: "",
@@ -165,6 +168,54 @@ export default function App({ Component, pageProps }) {
     });
   }
 
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedValue, setEditedValue] = useState("");
+  const initialValue = selectedGoal;
+
+  const handleEdit = () => {
+    setEditedValue(initialValue);
+    setIsEditing(true);
+  };
+
+  function handleEditChange(event) {
+    const { name, value } = event.target;
+    setSelectedGoal((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  }
+
+  const handleSaveEdit = () => {
+    const updatedGoal = {
+      ...selectedGoal,
+      targetPerInterval: selectedGoal.targetPerInterval,
+      interval: selectedGoal.interval,
+      deadline: selectedGoal.deadline,
+    };
+
+    const updatedGoals = myGoalsArray.map((goal) =>
+      goal.id === selectedGoal.id ? updatedGoal : goal
+    );
+
+    setNewGoal((prevGoal) => ({
+      ...prevGoal,
+      myNewGoals: updatedGoals,
+    }));
+    setEditedValue(updatedGoal);
+    setIsEditing(false);
+  };
+
+  const handleCancel = () => {
+    setEditedValue(initialValue);
+    setSelectedGoal((prevState) => ({
+      ...prevState,
+      targetPerInterval: editedValue.targetPerInterval,
+      interval: editedValue.interval,
+      deadline: editedValue.deadline,
+    }));
+    setIsEditing(false);
+  };
+
   return (
     <>
       <GlobalStyle />
@@ -185,6 +236,11 @@ export default function App({ Component, pageProps }) {
         handleToggleChecked={handleToggleChecked}
         handleUserInput={handleUserInput}
         handleDeleteGoal={handleDeleteGoal}
+        handleEditChange={handleEditChange}
+        handleSaveEdit={handleSaveEdit}
+        isEditing={isEditing}
+        handleCancel={handleCancel}
+        handleEdit={handleEdit}
       />
       <Navigation />
     </>
