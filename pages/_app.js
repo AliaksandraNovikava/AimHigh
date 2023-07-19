@@ -27,7 +27,6 @@ export default function App({ Component, pageProps }) {
       myNewGoals: [],
     },
   });
-  const [isEditing, setIsEditing] = useState(false);
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -169,34 +168,53 @@ export default function App({ Component, pageProps }) {
     });
   }
 
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedValue, setEditedValue] = useState("");
+  const initialValue = selectedGoal;
+
+  const handleEdit = () => {
+    setEditedValue(initialValue);
+    setIsEditing(true);
+  };
+
   function handleEditChange(event) {
     const { name, value } = event.target;
-
     setSelectedGoal((prevState) => ({
       ...prevState,
       [name]: value,
     }));
   }
 
-  function handleSaveEdit() {
+  const handleSaveEdit = () => {
     const updatedGoal = {
       ...selectedGoal,
       targetPerInterval: selectedGoal.targetPerInterval,
       interval: selectedGoal.interval,
       deadline: selectedGoal.deadline,
     };
-    setSelectedGoal(updatedGoal);
 
-    // const updatedGoals = goals.map((goal) =>
-    //   goal.id === selectedGoal.id ? updatedGoal : goal
-    // );
+    const updatedGoals = myGoalsArray.map((goal) =>
+      goal.id === selectedGoal.id ? updatedGoal : goal
+    );
 
-    // setNewGoal((prevGoal) => ({
-    //   ...prevGoal,
-    //   myNewGoals: updatedGoals,
-    // }));
+    setNewGoal((prevGoal) => ({
+      ...prevGoal,
+      myNewGoals: updatedGoals,
+    }));
+    setEditedValue(updatedGoal);
     setIsEditing(false);
-  }
+  };
+
+  const handleCancel = () => {
+    setEditedValue(initialValue);
+    setSelectedGoal((prevState) => ({
+      ...prevState,
+      targetPerInterval: editedValue.targetPerInterval,
+      interval: editedValue.interval,
+      deadline: editedValue.deadline,
+    }));
+    setIsEditing(false);
+  };
 
   return (
     <>
@@ -220,6 +238,9 @@ export default function App({ Component, pageProps }) {
         handleDeleteGoal={handleDeleteGoal}
         handleEditChange={handleEditChange}
         handleSaveEdit={handleSaveEdit}
+        isEditing={isEditing}
+        handleCancel={handleCancel}
+        handleEdit={handleEdit}
       />
       <Navigation />
     </>

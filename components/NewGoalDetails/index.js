@@ -47,13 +47,15 @@ const StyledButtonsBox = styled.div`
 `;
 
 export default function NewGoalDetails({
-  newGoalsEntries,
   isModalOpen,
   closeModal,
   selectedGoal,
   onDeleteGoal,
   onEditGoal,
   onSaveEdit,
+  onCancelEdit,
+  onEdit,
+  isEditing,
 }) {
   const initialDays = [];
   const [days, setDays] = useState(initialDays);
@@ -67,7 +69,6 @@ export default function NewGoalDetails({
       <StyledDescription>Please pick one or more days.</StyledDescription>
     );
 
-  const [isEditing, setIsEditing] = useState(false);
   let goalContent;
   let goalDeadline;
   let editButtons;
@@ -117,8 +118,8 @@ export default function NewGoalDetails({
     );
     editButtons = (
       <StyledButtonsBox>
-        <Button onClick={() => setIsEditing(false)}>Save</Button>
-        <Button onClick={() => setIsEditing(false)}>Cancel</Button>
+        <Button onClick={onSaveEdit}>Save</Button>
+        <Button onClick={onCancelEdit}>Cancel</Button>
       </StyledButtonsBox>
     );
   } else if (selectedGoal) {
@@ -144,7 +145,7 @@ export default function NewGoalDetails({
     );
     editButtons = (
       <StyledButtonsBox>
-        <Button onClick={() => setIsEditing(true)}>Edit</Button>
+        <Button onClick={onEdit}>Edit</Button>
         <Button onClick={() => onDeleteGoal(selectedGoal.id)}>Delete</Button>
       </StyledButtonsBox>
     );
