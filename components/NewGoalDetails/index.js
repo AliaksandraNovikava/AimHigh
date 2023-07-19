@@ -46,6 +46,10 @@ const StyledButtonsBox = styled.div`
   gap: 30px;
 `;
 
+const StyledInput = styled.input`
+  width: 50px;
+`;
+
 export default function NewGoalDetails({
   isModalOpen,
   closeModal,
@@ -77,13 +81,13 @@ export default function NewGoalDetails({
     goalContent = (
       <>
         <div>
-          <input
+          <StyledInput
             type="number"
             name="targetPerInterval"
             value={selectedGoal.targetPerInterval}
             onChange={onEditGoal}
           />
-          <span>time(s) a</span>
+          <span> time(s) a </span>
           <select
             name="interval"
             value={selectedGoal.interval}
@@ -93,28 +97,31 @@ export default function NewGoalDetails({
             <option value="week">Week</option>
             <option value="month">Month</option>
           </select>
-          <StyledCalendar>
-            <StyledDescription>
-              Mark the days when you did something to achieve your goal.
-            </StyledDescription>
-            <DayPicker
-              mode="multiple"
-              min={1}
-              selected={days}
-              onSelect={setDays}
-              footer={footer}
-            />
-          </StyledCalendar>
         </div>
+        <StyledCalendar>
+          <StyledDescription>
+            Mark the days when you did something to achieve your goal.
+          </StyledDescription>
+          <DayPicker
+            mode="multiple"
+            min={1}
+            selected={days}
+            onSelect={setDays}
+            footer={footer}
+          />
+        </StyledCalendar>
       </>
     );
     goalDeadline = (
-      <input
-        name="deadline"
-        type="date"
-        value={selectedGoal.deadline}
-        onChange={onEditGoal}
-      />
+      <StyledDeadlineBox>
+        Deadline:
+        <input
+          name="deadline"
+          type="date"
+          value={selectedGoal.deadline}
+          onChange={onEditGoal}
+        />
+      </StyledDeadlineBox>
     );
     editButtons = (
       <StyledButtonsBox>
@@ -145,7 +152,9 @@ export default function NewGoalDetails({
     );
     editButtons = (
       <StyledButtonsBox>
-        <Button onClick={onEdit}>Edit</Button>
+        {(selectedGoal.interval || selectedGoal.deadline) && (
+          <Button onClick={onEdit}>Edit</Button>
+        )}
         <Button onClick={() => onDeleteGoal(selectedGoal.id)}>Delete</Button>
       </StyledButtonsBox>
     );
