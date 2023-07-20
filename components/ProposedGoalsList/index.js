@@ -1,14 +1,14 @@
 import ProposedGoalPreview from "../ProposedGoalPreview/index.js";
 import styled from "styled-components";
 
-const StyledList = styled.div`
+export const StyledList = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 15px;
   padding-bottom: 25px;
 `;
 
-const StyledCard = styled.article`
+export const StyledCard = styled.article`
   padding: 20px;
   border-radius: 15px;
   background-color: ${(props) => props.backgroundcolor};

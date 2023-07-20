@@ -27,6 +27,9 @@ export default function App({ Component, pageProps }) {
       myNewGoals: [],
     },
   });
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedValue, setEditedValue] = useState("");
+  const initialValue = selectedGoal;
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -126,6 +129,7 @@ export default function App({ Component, pageProps }) {
       deadlineVisible: false,
       deadline: "",
     }));
+    setIsEditing(false);
   };
 
   function handleToggleChecked(id) {
@@ -167,10 +171,6 @@ export default function App({ Component, pageProps }) {
       ],
     });
   }
-
-  const [isEditing, setIsEditing] = useState(false);
-  const [editedValue, setEditedValue] = useState("");
-  const initialValue = selectedGoal;
 
   const handleEdit = () => {
     setEditedValue(initialValue);

@@ -1,7 +1,12 @@
 import styled from "styled-components";
 import Link from "next/link";
 import Icon from "@mdi/react";
-import { mdiPlusCircle, mdiBullseyeArrow, mdiTrophy } from "@mdi/js";
+import {
+  mdiPlusCircle,
+  mdiBullseyeArrow,
+  mdiTrophy,
+  mdiChartBox,
+} from "@mdi/js";
 
 const NavBar = styled.nav`
   display: flex;
@@ -49,6 +54,10 @@ export default function Navigation() {
         <StyledIconBox href="/achievements" area-label="view all my goals">
           <Icon path={mdiTrophy} size={1.3} color="#000" />
           Achievements
+        </StyledIconBox>
+        <StyledIconBox href="/statistics" area-label="view statistics">
+          <Icon path={mdiChartBox} size={1.3} color="#000" />
+          Statistics
         </StyledIconBox>
       </NavBar>
     </>
