@@ -6,9 +6,13 @@ import {
   StyledTitle,
 } from "../NewGoalPreview";
 import Icon from "@mdi/react";
-import { mdiCheckBold } from "@mdi/js";
+import { mdiCheckBold, mdiFire } from "@mdi/js";
+import { useContext } from "react";
+import { MarkedDaysContext } from "../NewGoalDetails";
 
 export default function ProgressPreview({ image, title }) {
+  const { markedDays, setMarkedDays } = useContext(MarkedDaysContext);
+  console.log("markedDays", markedDays);
   return (
     <StyledBox alignitems="center">
       <StyledCardContent>
@@ -16,9 +20,9 @@ export default function ProgressPreview({ image, title }) {
         <StyledTitle fontsize="0.9em">{title}</StyledTitle>
       </StyledCardContent>
       <StyledIconBox>
-        <StyledBox alignitems="center">
-          <Icon path={mdiCheckBold} size={1} color="#aeaeae" />
-          <p>5</p>
+        <StyledBox alignitems="center" justifycontent="center">
+          <Icon path={mdiFire} size={1} color="#f14c01" />
+          <p>{markedDays.length}</p>
         </StyledBox>
       </StyledIconBox>
     </StyledBox>

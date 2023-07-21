@@ -18,7 +18,7 @@ const StyledDate = styled.p`
 export const StyledBox = styled.div`
   display: flex;
   align-items: ${(props) => props.alignitems};
-  justify-content: space-between;
+  justify-content: ${(props) => props.justifycontent};
 `;
 
 export const StyledCardContent = styled.div`
@@ -50,7 +50,7 @@ export default function NewGoalPreview({
   goal,
 }) {
   return (
-    <StyledBox alignitems="flex-start">
+    <StyledBox alignitems="flex-start" justifycontent="space-between">
       <StyledCardContent onClick={() => onOpenModal(goal)}>
         <StyledImage src={image} alt={title} width={35} height={35} />
         <div>

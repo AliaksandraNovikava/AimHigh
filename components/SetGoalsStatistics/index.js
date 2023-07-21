@@ -4,8 +4,8 @@ export default function SetGoalsStatistics() {
   return (
     <>
       <StyledList>
-        <StyledCard>lorem ipsum</StyledCard>
-        <StyledCard>lorem ipsum</StyledCard>
+        <StyledCard backgroundcolor="#fff">lorem ipsum</StyledCard>
+        <StyledCard backgroundcolor="#fff">lorem ipsum</StyledCard>
       </StyledList>
     </>
   );

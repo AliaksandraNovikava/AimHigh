@@ -5,7 +5,8 @@ import {
   StyledGoalText,
 } from "@/components/NewGoalForm";
 import styled from "styled-components";
-import { useState } from "react";
+import { useState, createContext } from "react";
+import useLocalStorageState from "use-local-storage-state";
 import Image from "next/image";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
@@ -50,6 +51,17 @@ const StyledInput = styled.input`
   width: 50px;
 `;
 
+export const MarkedDaysContext = createContext();
+export const MarkedDaysProvider = ({ children }) => {
+  const [markedDays, setMarkedDays] = useLocalStorageState("markedDays", null);
+
+  return (
+    <MarkedDaysContext.Provider value={{ markedDays, setMarkedDays }}>
+      {children}
+    </MarkedDaysContext.Provider>
+  );
+};
+
 export default function NewGoalDetails({
   isModalOpen,
   closeModal,
@@ -64,6 +76,22 @@ export default function NewGoalDetails({
   const initialDays = [];
   const [days, setDays] = useState(initialDays);
 
+  const [markedDays, setMarkedDays] = useLocalStorageState("markedDays", null);
+  const handleDayClick = (day) => {
+    const clickedDay = day;
+    const newMarkedDay = {
+      goalId: selectedGoal.id,
+      date: clickedDay,
+    };
+    setMarkedDays((prevMarkedDays) => {
+      if (!prevMarkedDays) {
+        return [newMarkedDay];
+      }
+      return [...prevMarkedDays, newMarkedDay];
+    });
+  };
+  console.log("markedDays", markedDays);
+
   const footer =
     days && days.length > 0 ? (
       <StyledDescription>
@@ -72,6 +100,8 @@ export default function NewGoalDetails({
     ) : (
       <StyledDescription>Please pick one or more days.</StyledDescription>
     );
+
+  console.log("days: ", days);
 
   let goalContent;
   let goalDeadline;
@@ -108,6 +138,7 @@ export default function NewGoalDetails({
             selected={days}
             onSelect={setDays}
             footer={footer}
+            onDayClick={handleDayClick}
           />
         </StyledCalendar>
       </>
@@ -143,6 +174,7 @@ export default function NewGoalDetails({
             selected={days}
             onSelect={setDays}
             footer={footer}
+            onDayClick={handleDayClick}
           />
         </StyledCalendar>
       </>

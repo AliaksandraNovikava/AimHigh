@@ -7,7 +7,7 @@ export default function ActiveGoalsProgress({ newGoalsEntries }) {
     <>
       <StyledList>
         {uncheckedGoals.map((goal) => (
-          <StyledCard key={goal.id}>
+          <StyledCard key={goal.id} backgroundcolor="#fff">
             <ProgressPreview image={goal.icon} title={goal.name} />
           </StyledCard>
         ))}

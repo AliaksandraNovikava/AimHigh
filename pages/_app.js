@@ -6,6 +6,7 @@ import { uid } from "uid";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import Navigation from "@/components/Navigation";
+import { MarkedDaysProvider } from "@/components/NewGoalDetails";
 
 export default function App({ Component, pageProps }) {
   const [isModalOpen, setIsModalOpen] = useLocalStorageState(
@@ -219,29 +220,31 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <GlobalStyle />
-      <Component
-        {...pageProps}
-        goals={goals}
-        categoryColors={categoryColors}
-        newGoal={newGoal}
-        checkedGoals={checkedGoals}
-        isModalOpen={isModalOpen}
-        closeModal={closeModal}
-        handleOpenModal={handleOpenModal}
-        handleOpenModalFromListItem={handleOpenModalFromListItem}
-        handleInputChange={handleInputChange}
-        handleTargetPerIntervalChange={handleTargetPerIntervalChange}
-        handleAddGoal={handleAddGoal}
-        selectedGoal={selectedGoal}
-        handleToggleChecked={handleToggleChecked}
-        handleUserInput={handleUserInput}
-        handleDeleteGoal={handleDeleteGoal}
-        handleEditChange={handleEditChange}
-        handleSaveEdit={handleSaveEdit}
-        isEditing={isEditing}
-        handleCancel={handleCancel}
-        handleEdit={handleEdit}
-      />
+      <MarkedDaysProvider>
+        <Component
+          {...pageProps}
+          goals={goals}
+          categoryColors={categoryColors}
+          newGoal={newGoal}
+          checkedGoals={checkedGoals}
+          isModalOpen={isModalOpen}
+          closeModal={closeModal}
+          handleOpenModal={handleOpenModal}
+          handleOpenModalFromListItem={handleOpenModalFromListItem}
+          handleInputChange={handleInputChange}
+          handleTargetPerIntervalChange={handleTargetPerIntervalChange}
+          handleAddGoal={handleAddGoal}
+          selectedGoal={selectedGoal}
+          handleToggleChecked={handleToggleChecked}
+          handleUserInput={handleUserInput}
+          handleDeleteGoal={handleDeleteGoal}
+          handleEditChange={handleEditChange}
+          handleSaveEdit={handleSaveEdit}
+          isEditing={isEditing}
+          handleCancel={handleCancel}
+          handleEdit={handleEdit}
+        />
+      </MarkedDaysProvider>
       <Navigation />
     </>
   );
