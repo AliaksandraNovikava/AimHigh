@@ -7,8 +7,6 @@ import {
 } from "../NewGoalPreview";
 import Icon from "@mdi/react";
 import { mdiFire } from "@mdi/js";
-import { useContext } from "react";
-import { MarkedDaysContext } from "../NewGoalDetails";
 
 export default function ProgressPreview({
   image,
@@ -16,8 +14,6 @@ export default function ProgressPreview({
   markedDaysCount,
   uncheckedGoalId,
 }) {
-  const { markedDays, setMarkedDays } = useContext(MarkedDaysContext);
-
   return (
     <StyledBox alignitems="center">
       <StyledCardContent>

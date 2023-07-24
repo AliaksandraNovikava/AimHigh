@@ -96,9 +96,6 @@ export default function StatisticsPage({
           <TabContent>Deadlines</TabContent>
         </Tab>
       </Tabs>
-
-      {/* <StyledHeading>My progress</StyledHeading>
-      <ActiveGoalsProgress newGoalsEntries={newGoal.myNewGoals} /> */}
     </>
   );
 }

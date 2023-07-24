@@ -74,24 +74,17 @@ export default function NewGoalDetails({
   onEdit,
   isEditing,
 }) {
+  // Please note:
+  // I (wanted but) couldn't use useLocalStorageState with the DayPicker state variable "days".
+  // The component wouldn't work if I implemeted this hook.
+  // That's why until I've found a solution for this problem, all clicked days are saved in the markedDays variable.
+
   const initialDays = [];
   const [days, setDays] = useState(initialDays);
-  console.log("days", days);
-
-  const myDays = [...days];
-  console.log("myDays", myDays);
-  const [selectedDays, setSelectedDays] = useLocalStorageState(
-    "selectedDays",
-    []
-  );
-  setSelectedDays(myDays);
-  console.log("selectedDays", selectedDays);
-
   const [markedDays, setMarkedDays] = useLocalStorageState("markedDays", []);
 
   const handleDayClick = (day) => {
     const clickedDay = day;
-    console.log("clickedDay", clickedDay);
     if (!markedDays) {
       setMarkedDays([]);
     }
@@ -109,18 +102,9 @@ export default function NewGoalDetails({
         }
         return [...prevMarkedDays, newMarkedDay];
       });
-      //   setSelectedDays((prevDays) => [...prevDays, newMarkedDay]);
-      setSelectedDays((prevSelectedDays) => {
-        if (!prevSelectedDays) {
-          return [newMarkedDay];
-        }
-        return [...prevSelectedDays, newMarkedDay];
-      });
     }
-    console.log("setSelectedDays onClick: ", selectedDays);
   };
-  console.log("markedDays", markedDays);
-  console.log("setSelectedDays onClick after: ", selectedDays);
+
   const footer =
     days && days.length > 0 ? (
       <StyledDescription>

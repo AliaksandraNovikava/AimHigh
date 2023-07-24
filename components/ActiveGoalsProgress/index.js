@@ -8,7 +8,7 @@ export default function ActiveGoalsProgress({ newGoalsEntries }) {
   const uncheckedGoals = newGoalsEntries.filter((goal) => !goal.isChecked);
   const { markedDays, setMarkedDays } = useContext(MarkedDaysContext);
   const [markedDaysCount, setMarkedDaysCount] = useState({});
-  console.log("markedDays in Progress", markedDays);
+
   useEffect(() => {
     const countMarkedDays = () => {
       const count = {};
