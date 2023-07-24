@@ -74,10 +74,11 @@ export default function NewGoalDetails({
   onEdit,
   isEditing,
 }) {
-  // Please note:
+  // PLEASE NOTE:
   // I (wanted but) couldn't use useLocalStorageState with the DayPicker state variable "days".
   // The component wouldn't work if I implemeted this hook.
   // That's why until I've found a solution for this problem, all clicked days are saved in the markedDays variable.
+  // There're some other problems related to the DayPicker component that are visible in the frontend. Please ignore them for now.
 
   const initialDays = [];
   const [days, setDays] = useState(initialDays);
