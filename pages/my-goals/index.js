@@ -6,6 +6,7 @@ export default function MyGoalsPage({
   newGoal,
   handleToggleChecked,
   checkedGoals,
+  uncheckedGoals,
   isModalOpen,
   closeModal,
   handleOpenModalFromListItem,
@@ -21,9 +22,8 @@ export default function MyGoalsPage({
     <>
       <StyledHeading>My Goals</StyledHeading>
       <NewGoalsList
-        newGoalsEntries={newGoal.myNewGoals}
         handleToggleChecked={handleToggleChecked}
-        checkedGoals={checkedGoals}
+        uncheckedGoals={uncheckedGoals}
         onOpenModal={handleOpenModalFromListItem}
       />
       <NewGoalDetails

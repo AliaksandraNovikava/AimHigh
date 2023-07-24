@@ -24,7 +24,7 @@ const NavBar = styled.nav`
 
 const StyledIconBox = styled(Link)`
   transition: all 0.1s ease-in-out;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   line-height: 12px;
   color: #0f0f0f;
   cursor: pointer;

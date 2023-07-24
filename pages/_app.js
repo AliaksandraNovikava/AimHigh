@@ -31,6 +31,9 @@ export default function App({ Component, pageProps }) {
   const [isEditing, setIsEditing] = useState(false);
   const [editedValue, setEditedValue] = useState("");
   const initialValue = selectedGoal;
+  const myGoalsArray = newGoal.myNewGoals;
+  const checkedGoals = myGoalsArray.filter((goal) => goal.isChecked);
+  const uncheckedGoals = myGoalsArray.filter((goal) => !goal.isChecked);
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -144,9 +147,6 @@ export default function App({ Component, pageProps }) {
     }));
   }
 
-  const myGoalsArray = newGoal.myNewGoals;
-  const checkedGoals = myGoalsArray.filter((goal) => goal.isChecked);
-
   function handleDelete(id) {
     const remainedGoals = myGoalsArray.filter((goal) => goal.id !== id);
     setNewGoal((prevGoal) => ({
@@ -227,6 +227,7 @@ export default function App({ Component, pageProps }) {
           categoryColors={categoryColors}
           newGoal={newGoal}
           checkedGoals={checkedGoals}
+          uncheckedGoals={uncheckedGoals}
           isModalOpen={isModalOpen}
           closeModal={closeModal}
           handleOpenModal={handleOpenModal}

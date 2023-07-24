@@ -14,11 +14,10 @@ export const StyledCard = styled.article`
 `;
 
 export default function NewGoalsList({
-  newGoalsEntries,
   handleToggleChecked,
   onOpenModal,
+  uncheckedGoals,
 }) {
-  const uncheckedGoals = newGoalsEntries.filter((goal) => !goal.isChecked);
   return (
     <StyledList>
       {uncheckedGoals.map((goal) => (

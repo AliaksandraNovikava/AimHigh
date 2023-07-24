@@ -10,6 +10,7 @@ import useLocalStorageState from "use-local-storage-state";
 import Image from "next/image";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
+import { isSameDay } from "date-fns";
 import Button from "@/components/Button";
 
 const StyledCalendar = styled.section`
@@ -53,7 +54,7 @@ const StyledInput = styled.input`
 
 export const MarkedDaysContext = createContext();
 export const MarkedDaysProvider = ({ children }) => {
-  const [markedDays, setMarkedDays] = useLocalStorageState("markedDays", null);
+  const [markedDays, setMarkedDays] = useLocalStorageState("markedDays", []);
 
   return (
     <MarkedDaysContext.Provider value={{ markedDays, setMarkedDays }}>
@@ -75,23 +76,51 @@ export default function NewGoalDetails({
 }) {
   const initialDays = [];
   const [days, setDays] = useState(initialDays);
+  console.log("days", days);
 
-  const [markedDays, setMarkedDays] = useLocalStorageState("markedDays", null);
+  const myDays = [...days];
+  console.log("myDays", myDays);
+  const [selectedDays, setSelectedDays] = useLocalStorageState(
+    "selectedDays",
+    []
+  );
+  setSelectedDays(myDays);
+  console.log("selectedDays", selectedDays);
+
+  const [markedDays, setMarkedDays] = useLocalStorageState("markedDays", []);
+
   const handleDayClick = (day) => {
     const clickedDay = day;
-    const newMarkedDay = {
-      goalId: selectedGoal.id,
-      date: clickedDay,
-    };
-    setMarkedDays((prevMarkedDays) => {
-      if (!prevMarkedDays) {
-        return [newMarkedDay];
-      }
-      return [...prevMarkedDays, newMarkedDay];
-    });
+    console.log("clickedDay", clickedDay);
+    if (!markedDays) {
+      setMarkedDays([]);
+    }
+    const isAlreadyMarked = markedDays.some((markedDay) =>
+      isSameDay(markedDay.date, clickedDay)
+    );
+    if (!isAlreadyMarked) {
+      const newMarkedDay = {
+        goalId: selectedGoal.id,
+        date: clickedDay,
+      };
+      setMarkedDays((prevMarkedDays) => {
+        if (!prevMarkedDays) {
+          return [newMarkedDay];
+        }
+        return [...prevMarkedDays, newMarkedDay];
+      });
+      //   setSelectedDays((prevDays) => [...prevDays, newMarkedDay]);
+      setSelectedDays((prevSelectedDays) => {
+        if (!prevSelectedDays) {
+          return [newMarkedDay];
+        }
+        return [...prevSelectedDays, newMarkedDay];
+      });
+    }
+    console.log("setSelectedDays onClick: ", selectedDays);
   };
   console.log("markedDays", markedDays);
-
+  console.log("setSelectedDays onClick after: ", selectedDays);
   const footer =
     days && days.length > 0 ? (
       <StyledDescription>
@@ -100,8 +129,6 @@ export default function NewGoalDetails({
     ) : (
       <StyledDescription>Please pick one or more days.</StyledDescription>
     );
-
-  console.log("days: ", days);
 
   let goalContent;
   let goalDeadline;
