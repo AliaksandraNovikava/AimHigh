@@ -6,6 +6,7 @@ import { uid } from "uid";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import Navigation from "@/components/Navigation";
+import { MarkedDaysProvider } from "@/components/NewGoalDetails";
 
 export default function App({ Component, pageProps }) {
   const [isModalOpen, setIsModalOpen] = useLocalStorageState(
@@ -27,6 +28,12 @@ export default function App({ Component, pageProps }) {
       myNewGoals: [],
     },
   });
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedValue, setEditedValue] = useState("");
+  const initialValue = selectedGoal;
+  const myGoalsArray = newGoal.myNewGoals;
+  const checkedGoals = myGoalsArray.filter((goal) => goal.isChecked);
+  const uncheckedGoals = myGoalsArray.filter((goal) => !goal.isChecked);
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -126,6 +133,7 @@ export default function App({ Component, pageProps }) {
       deadlineVisible: false,
       deadline: "",
     }));
+    setIsEditing(false);
   };
 
   function handleToggleChecked(id) {
@@ -138,9 +146,6 @@ export default function App({ Component, pageProps }) {
       myNewGoals: updatedGoalsArray,
     }));
   }
-
-  const myGoalsArray = newGoal.myNewGoals;
-  const checkedGoals = myGoalsArray.filter((goal) => goal.isChecked);
 
   function handleDelete(id) {
     const remainedGoals = myGoalsArray.filter((goal) => goal.id !== id);
@@ -167,10 +172,6 @@ export default function App({ Component, pageProps }) {
       ],
     });
   }
-
-  const [isEditing, setIsEditing] = useState(false);
-  const [editedValue, setEditedValue] = useState("");
-  const initialValue = selectedGoal;
 
   const handleEdit = () => {
     setEditedValue(initialValue);
@@ -219,29 +220,32 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <GlobalStyle />
-      <Component
-        {...pageProps}
-        goals={goals}
-        categoryColors={categoryColors}
-        newGoal={newGoal}
-        checkedGoals={checkedGoals}
-        isModalOpen={isModalOpen}
-        closeModal={closeModal}
-        handleOpenModal={handleOpenModal}
-        handleOpenModalFromListItem={handleOpenModalFromListItem}
-        handleInputChange={handleInputChange}
-        handleTargetPerIntervalChange={handleTargetPerIntervalChange}
-        handleAddGoal={handleAddGoal}
-        selectedGoal={selectedGoal}
-        handleToggleChecked={handleToggleChecked}
-        handleUserInput={handleUserInput}
-        handleDeleteGoal={handleDeleteGoal}
-        handleEditChange={handleEditChange}
-        handleSaveEdit={handleSaveEdit}
-        isEditing={isEditing}
-        handleCancel={handleCancel}
-        handleEdit={handleEdit}
-      />
+      <MarkedDaysProvider>
+        <Component
+          {...pageProps}
+          goals={goals}
+          categoryColors={categoryColors}
+          newGoal={newGoal}
+          checkedGoals={checkedGoals}
+          uncheckedGoals={uncheckedGoals}
+          isModalOpen={isModalOpen}
+          closeModal={closeModal}
+          handleOpenModal={handleOpenModal}
+          handleOpenModalFromListItem={handleOpenModalFromListItem}
+          handleInputChange={handleInputChange}
+          handleTargetPerIntervalChange={handleTargetPerIntervalChange}
+          handleAddGoal={handleAddGoal}
+          selectedGoal={selectedGoal}
+          handleToggleChecked={handleToggleChecked}
+          handleUserInput={handleUserInput}
+          handleDeleteGoal={handleDeleteGoal}
+          handleEditChange={handleEditChange}
+          handleSaveEdit={handleSaveEdit}
+          isEditing={isEditing}
+          handleCancel={handleCancel}
+          handleEdit={handleEdit}
+        />
+      </MarkedDaysProvider>
       <Navigation />
     </>
   );

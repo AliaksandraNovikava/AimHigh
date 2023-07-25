@@ -3,8 +3,9 @@ import styled from "styled-components";
 import Icon from "@mdi/react";
 import { mdiCheckCircleOutline, mdiCheckCircle } from "@mdi/js";
 
-const StyledTitle = styled.p`
+export const StyledTitle = styled.p`
   margin: 0;
+  font-size: ${(props) => props.fontsize};
 `;
 
 const StyledDate = styled.p`
@@ -14,23 +15,23 @@ const StyledDate = styled.p`
   color: #8e8e93;
 `;
 
-const StyledBox = styled.div`
+export const StyledBox = styled.div`
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
+  align-items: ${(props) => props.alignitems};
+  justify-content: ${(props) => props.justifycontent};
 `;
 
-const StyledCardContent = styled.div`
+export const StyledCardContent = styled.div`
   width: 85%;
   display: flex;
   align-items: center;
 `;
 
-const StyledImage = styled(Image)`
+export const StyledImage = styled(Image)`
   margin-right: 15px;
 `;
 
-const StyledIconBox = styled.div`
+export const StyledIconBox = styled.div`
   width: 15%;
   text-align: end;
   cursor: pointer;
@@ -49,7 +50,7 @@ export default function NewGoalPreview({
   goal,
 }) {
   return (
-    <StyledBox>
+    <StyledBox alignitems="flex-start" justifycontent="space-between">
       <StyledCardContent onClick={() => onOpenModal(goal)}>
         <StyledImage src={image} alt={title} width={35} height={35} />
         <div>

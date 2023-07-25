@@ -5,10 +5,12 @@ import {
   StyledGoalText,
 } from "@/components/NewGoalForm";
 import styled from "styled-components";
-import { useState } from "react";
+import { useState, createContext } from "react";
+import useLocalStorageState from "use-local-storage-state";
 import Image from "next/image";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
+import { isSameDay } from "date-fns";
 import Button from "@/components/Button";
 
 const StyledCalendar = styled.section`
@@ -50,6 +52,17 @@ const StyledInput = styled.input`
   width: 50px;
 `;
 
+export const MarkedDaysContext = createContext();
+export const MarkedDaysProvider = ({ children }) => {
+  const [markedDays, setMarkedDays] = useLocalStorageState("markedDays", []);
+
+  return (
+    <MarkedDaysContext.Provider value={{ markedDays, setMarkedDays }}>
+      {children}
+    </MarkedDaysContext.Provider>
+  );
+};
+
 export default function NewGoalDetails({
   isModalOpen,
   closeModal,
@@ -61,8 +74,37 @@ export default function NewGoalDetails({
   onEdit,
   isEditing,
 }) {
+  // PLEASE NOTE:
+  // I (wanted but) couldn't use useLocalStorageState with the DayPicker state variable "days".
+  // The component wouldn't work if I implemeted this hook.
+  // That's why until I've found a solution for this problem, all clicked days are saved in the markedDays variable.
+  // There're some other problems related to the DayPicker component that are visible in the frontend. Please ignore them for now.
+
   const initialDays = [];
   const [days, setDays] = useState(initialDays);
+  const [markedDays, setMarkedDays] = useLocalStorageState("markedDays", []);
+
+  const handleDayClick = (day) => {
+    const clickedDay = day;
+    if (!markedDays) {
+      setMarkedDays([]);
+    }
+    const isAlreadyMarked = markedDays.some((markedDay) =>
+      isSameDay(markedDay.date, clickedDay)
+    );
+    if (!isAlreadyMarked) {
+      const newMarkedDay = {
+        goalId: selectedGoal.id,
+        date: clickedDay,
+      };
+      setMarkedDays((prevMarkedDays) => {
+        if (!prevMarkedDays) {
+          return [newMarkedDay];
+        }
+        return [...prevMarkedDays, newMarkedDay];
+      });
+    }
+  };
 
   const footer =
     days && days.length > 0 ? (
@@ -108,6 +150,7 @@ export default function NewGoalDetails({
             selected={days}
             onSelect={setDays}
             footer={footer}
+            onDayClick={handleDayClick}
           />
         </StyledCalendar>
       </>
@@ -143,6 +186,7 @@ export default function NewGoalDetails({
             selected={days}
             onSelect={setDays}
             footer={footer}
+            onDayClick={handleDayClick}
           />
         </StyledCalendar>
       </>

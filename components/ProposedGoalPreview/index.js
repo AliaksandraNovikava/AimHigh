@@ -1,7 +1,7 @@
 import Image from "next/image";
 import styled from "styled-components";
 
-const StyledTitle = styled.p`
+export const StyledTitle = styled.p`
   margin-bottom: 0;
 `;
 

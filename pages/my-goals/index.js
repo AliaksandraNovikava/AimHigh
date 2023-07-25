@@ -2,10 +2,11 @@ import NewGoalsList from "@/components/NewGoalsList";
 import NewGoalDetails from "@/components/NewGoalDetails";
 import { StyledHeading } from "..";
 
-export default function MyGoalsOPage({
+export default function MyGoalsPage({
   newGoal,
   handleToggleChecked,
   checkedGoals,
+  uncheckedGoals,
   isModalOpen,
   closeModal,
   handleOpenModalFromListItem,
@@ -21,9 +22,8 @@ export default function MyGoalsOPage({
     <>
       <StyledHeading>My Goals</StyledHeading>
       <NewGoalsList
-        newGoalsEntries={newGoal.myNewGoals}
         handleToggleChecked={handleToggleChecked}
-        checkedGoals={checkedGoals}
+        uncheckedGoals={uncheckedGoals}
         onOpenModal={handleOpenModalFromListItem}
       />
       <NewGoalDetails

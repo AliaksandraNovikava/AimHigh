@@ -9,20 +9,19 @@ export const StyledCard = styled.article`
   padding: 15px;
   margin-bottom: 15px;
   border-radius: 15px;
-  background-color: #f6f5f8;
+  background-color: ${(props) => props.backgroundcolor};
   box-shadow: 0 2px 6px rgb(109 94 255 / 10%);
 `;
 
 export default function NewGoalsList({
-  newGoalsEntries,
   handleToggleChecked,
   onOpenModal,
+  uncheckedGoals,
 }) {
-  const uncheckedGoals = newGoalsEntries.filter((goal) => !goal.isChecked);
   return (
     <StyledList>
       {uncheckedGoals.map((goal) => (
-        <StyledCard key={goal.id}>
+        <StyledCard key={goal.id} backgroundcolor="#f6f5f8">
           <NewGoalPreview
             image={goal.icon}
             title={goal.name}
