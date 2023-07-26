@@ -64,35 +64,6 @@ export default function DayPickerCalendar({ isModalOpen, selectedGoal }) {
     setMarkedDays(markedDaysObjects);
   }, [days, selectedGoal]);
 
-  function handleDayClick(day) {
-    const clickedDay = day;
-    if (!days) {
-      setDays([]);
-    }
-    const isAlreadyMarked = days.some((markedDay) =>
-      isSameDay(markedDay.date, clickedDay)
-    );
-    console.log("id:", selectedGoal.id);
-    if (!isAlreadyMarked) {
-      const newDay = {
-        goalId: selectedGoal.id.toString(),
-        date: clickedDay,
-      };
-      setDays((prevDays) => {
-        if (!prevDays) {
-          return [newDay];
-        }
-        return [...prevDays, newDay];
-      });
-      setMarkedDays((prevMarkedDays) => {
-        if (!prevMarkedDays) {
-          return [newDay];
-        }
-        return [...prevMarkedDays, { ...newDay }];
-      });
-    }
-  }
-
   console.log("markedDays:", markedDays);
   console.log("days:", days);
   const footer =
@@ -115,7 +86,6 @@ export default function DayPickerCalendar({ isModalOpen, selectedGoal }) {
         selected={days}
         onSelect={setDays}
         footer={footer}
-        onDayClick={handleDayClick}
       />
     </StyledCalendar>
   );
