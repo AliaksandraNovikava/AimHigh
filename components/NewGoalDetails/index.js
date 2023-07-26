@@ -1,32 +1,9 @@
-import {
-  StyledModalBody,
-  StyledModal,
-  StyledOverlay,
-  StyledGoalText,
-} from "@/components/NewGoalForm";
+import { StyledGoalText } from "@/components/NewGoalForm";
+import Modal from "../Modal";
+import DayPickerCalendar from "../DayPickerCalendar";
 import styled from "styled-components";
-import { useState, createContext } from "react";
-import useLocalStorageState from "use-local-storage-state";
 import Image from "next/image";
-import { DayPicker } from "react-day-picker";
-import "react-day-picker/dist/style.css";
-import { isSameDay } from "date-fns";
 import Button from "@/components/Button";
-
-const StyledCalendar = styled.section`
-  margin-top: 15px;
-  padding: 10px 13px 0;
-  border-radius: 15px;
-  background-color: #f6f5f8;
-  box-shadow: 0 2px 6px rgb(109 94 255 / 10%);
-`;
-
-const StyledDescription = styled.p`
-  font-size: 0.8em;
-  font-style: italic;
-  color: #8e8e93;
-  margin: 20px 10px;
-`;
 
 const StyledCloseButton = styled.span`
   position: absolute;
@@ -52,17 +29,6 @@ const StyledInput = styled.input`
   width: 50px;
 `;
 
-export const MarkedDaysContext = createContext();
-export const MarkedDaysProvider = ({ children }) => {
-  const [markedDays, setMarkedDays] = useLocalStorageState("markedDays", []);
-
-  return (
-    <MarkedDaysContext.Provider value={{ markedDays, setMarkedDays }}>
-      {children}
-    </MarkedDaysContext.Provider>
-  );
-};
-
 export default function NewGoalDetails({
   isModalOpen,
   closeModal,
@@ -79,41 +45,6 @@ export default function NewGoalDetails({
   // The component wouldn't work if I implemeted this hook.
   // That's why until I've found a solution for this problem, all clicked days are saved in the markedDays variable.
   // There're some other problems related to the DayPicker component that are visible in the frontend. Please ignore them for now.
-
-  const initialDays = [];
-  const [days, setDays] = useState(initialDays);
-  const [markedDays, setMarkedDays] = useLocalStorageState("markedDays", []);
-
-  const handleDayClick = (day) => {
-    const clickedDay = day;
-    if (!markedDays) {
-      setMarkedDays([]);
-    }
-    const isAlreadyMarked = markedDays.some((markedDay) =>
-      isSameDay(markedDay.date, clickedDay)
-    );
-    if (!isAlreadyMarked) {
-      const newMarkedDay = {
-        goalId: selectedGoal.id,
-        date: clickedDay,
-      };
-      setMarkedDays((prevMarkedDays) => {
-        if (!prevMarkedDays) {
-          return [newMarkedDay];
-        }
-        return [...prevMarkedDays, newMarkedDay];
-      });
-    }
-  };
-
-  const footer =
-    days && days.length > 0 ? (
-      <StyledDescription>
-        You selected <strong>{days.length}</strong> day(s).
-      </StyledDescription>
-    ) : (
-      <StyledDescription>Please pick one or more days.</StyledDescription>
-    );
 
   let goalContent;
   let goalDeadline;
@@ -140,19 +71,7 @@ export default function NewGoalDetails({
             <option value="month">Month</option>
           </select>
         </div>
-        <StyledCalendar>
-          <StyledDescription>
-            Mark the days when you did something to achieve your goal.
-          </StyledDescription>
-          <DayPicker
-            mode="multiple"
-            min={1}
-            selected={days}
-            onSelect={setDays}
-            footer={footer}
-            onDayClick={handleDayClick}
-          />
-        </StyledCalendar>
+        <DayPickerCalendar isModalOpen={isModalOpen} />
       </>
     );
     goalDeadline = (
@@ -176,19 +95,7 @@ export default function NewGoalDetails({
     goalContent = (
       <>
         {selectedGoal.targetPerInterval} time(s) a {selectedGoal.interval}
-        <StyledCalendar>
-          <StyledDescription>
-            Mark the days when you did something to achieve your goal.
-          </StyledDescription>
-          <DayPicker
-            mode="multiple"
-            min={1}
-            selected={days}
-            onSelect={setDays}
-            footer={footer}
-            onDayClick={handleDayClick}
-          />
-        </StyledCalendar>
+        <DayPickerCalendar isModalOpen={isModalOpen} />
       </>
     );
     goalDeadline = (
@@ -210,26 +117,23 @@ export default function NewGoalDetails({
   return (
     <>
       {isModalOpen && (
-        <StyledModalBody>
-          <StyledModal position="absolute" top="5%" hidden>
-            {selectedGoal && (
-              <>
-                <StyledCloseButton onClick={closeModal}>⨉</StyledCloseButton>
-                <Image
-                  src={selectedGoal.icon}
-                  alt={selectedGoal.name}
-                  width={40}
-                  height={40}
-                />
-                <StyledGoalText>{selectedGoal.name}</StyledGoalText>
-                {selectedGoal.interval && <>{goalContent}</>}
-                {selectedGoal.deadline && <>{goalDeadline}</>}
-                {editButtons}
-              </>
-            )}
-          </StyledModal>
-          <StyledOverlay onClick={closeModal} />
-        </StyledModalBody>
+        <Modal position="absolute" top="5%" closeModal={closeModal}>
+          {selectedGoal && (
+            <>
+              <StyledCloseButton onClick={closeModal}>⨉</StyledCloseButton>
+              <Image
+                src={selectedGoal.icon}
+                alt={selectedGoal.name}
+                width={40}
+                height={40}
+              />
+              <StyledGoalText>{selectedGoal.name}</StyledGoalText>
+              {selectedGoal.interval && <>{goalContent}</>}
+              {selectedGoal.deadline && <>{goalDeadline}</>}
+              {editButtons}
+            </>
+          )}
+        </Modal>
       )}
     </>
   );

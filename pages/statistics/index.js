@@ -1,5 +1,6 @@
 import SetGoalsStatistics from "@/components/SetGoalsStatistics";
 import ActiveGoalsProgress from "@/components/ActiveGoalsProgress";
+import Deadlines from "@/components/Deadlines";
 import { StyledHeading } from "..";
 import styled from "styled-components";
 
@@ -87,13 +88,15 @@ export default function StatisticsPage({
           <TabLabel htmlFor="progress">My Progress</TabLabel>
           <TabInput id="progress" name="statistics" type="radio" checked />
           <TabContent>
-            <ActiveGoalsProgress newGoalsEntries={newGoal.myNewGoals} />
+            <ActiveGoalsProgress uncheckedGoals={uncheckedGoals} />
           </TabContent>
         </Tab>
         <Tab>
           <TabLabel htmlFor="deadlines">Deadlines</TabLabel>
           <TabInput id="deadlines" name="statistics" type="radio" />
-          <TabContent>Deadlines</TabContent>
+          <TabContent>
+            <Deadlines uncheckedGoals={uncheckedGoals} />
+          </TabContent>
         </Tab>
       </Tabs>
     </>

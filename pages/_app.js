@@ -6,16 +6,15 @@ import { uid } from "uid";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import Navigation from "@/components/Navigation";
-import { MarkedDaysProvider } from "@/components/NewGoalDetails";
+import { MarkedDaysProvider } from "@/components/DayPickerCalendar";
 
 export default function App({ Component, pageProps }) {
-  const [isModalOpen, setIsModalOpen] = useLocalStorageState(
-    "isModalOpen",
-    false
-  );
+  const [isModalOpen, setIsModalOpen] = useLocalStorageState("isModalOpen", {
+    defaultValue: false,
+  });
   const [selectedGoal, setSelectedGoal] = useLocalStorageState(
     "selected Goal",
-    null
+    { defaultValue: null }
   );
   const [newGoal, setNewGoal] = useLocalStorageState("newGoal", {
     defaultValue: {
@@ -35,17 +34,17 @@ export default function App({ Component, pageProps }) {
   const checkedGoals = myGoalsArray.filter((goal) => goal.isChecked);
   const uncheckedGoals = myGoalsArray.filter((goal) => !goal.isChecked);
 
-  const handleOpenModal = () => {
+  function handleOpenModal() {
     setIsModalOpen(true);
     setSelectedGoal(null);
-  };
+  }
 
-  const handleOpenModalFromListItem = (goal) => {
+  function handleOpenModalFromListItem(goal) {
     setIsModalOpen(true);
     setSelectedGoal(goal);
-  };
+  }
 
-  const handleInputChange = (event) => {
+  function handleInputChange(event) {
     const { name, value, type, checked } = event.target;
     if (type === "checkbox") {
       setNewGoal((prevState) => ({
@@ -58,7 +57,7 @@ export default function App({ Component, pageProps }) {
         [name]: value,
       }));
     }
-  };
+  }
 
   function handleUserInput(event) {
     setNewGoal({
@@ -67,14 +66,14 @@ export default function App({ Component, pageProps }) {
     });
   }
 
-  const handleTargetPerIntervalChange = (value) => {
+  function handleTargetPerIntervalChange(value) {
     setNewGoal((prevState) => ({
       ...prevState,
       targetPerInterval: value,
     }));
-  };
+  }
 
-  const handleAddGoal = (event) => {
+  function handleAddGoal(event) {
     event.preventDefault();
     const myNewGoal = {
       id: uid(),
@@ -106,7 +105,7 @@ export default function App({ Component, pageProps }) {
     }));
     setIsModalOpen(false);
     event.target.reset();
-  };
+  }
 
   useEffect(() => {
     const handleEscapeKeyPress = (e) => {
@@ -122,7 +121,7 @@ export default function App({ Component, pageProps }) {
     };
   });
 
-  const closeModal = () => {
+  function closeModal() {
     setIsModalOpen(false);
     setNewGoal((prevGoal) => ({
       ...prevGoal,
@@ -134,7 +133,7 @@ export default function App({ Component, pageProps }) {
       deadline: "",
     }));
     setIsEditing(false);
-  };
+  }
 
   function handleToggleChecked(id) {
     const updatedGoalsArray = myGoalsArray.map((goal) =>
@@ -173,10 +172,10 @@ export default function App({ Component, pageProps }) {
     });
   }
 
-  const handleEdit = () => {
+  function handleEdit() {
     setEditedValue(initialValue);
     setIsEditing(true);
-  };
+  }
 
   function handleEditChange(event) {
     const { name, value } = event.target;
@@ -186,7 +185,7 @@ export default function App({ Component, pageProps }) {
     }));
   }
 
-  const handleSaveEdit = () => {
+  function handleSaveEdit() {
     const updatedGoal = {
       ...selectedGoal,
       targetPerInterval: selectedGoal.targetPerInterval,
@@ -204,9 +203,9 @@ export default function App({ Component, pageProps }) {
     }));
     setEditedValue(updatedGoal);
     setIsEditing(false);
-  };
+  }
 
-  const handleCancel = () => {
+  function handleCancel() {
     setEditedValue(initialValue);
     setSelectedGoal((prevState) => ({
       ...prevState,
@@ -215,7 +214,7 @@ export default function App({ Component, pageProps }) {
       deadline: editedValue.deadline,
     }));
     setIsEditing(false);
-  };
+  }
 
   return (
     <>
