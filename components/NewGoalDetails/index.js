@@ -5,7 +5,7 @@ import styled from "styled-components";
 import Image from "next/image";
 import Button from "@/components/Button";
 
-const StyledCloseButton = styled.span`
+export const StyledCloseButton = styled.span`
   position: absolute;
   top: 10px;
   right: 15px;

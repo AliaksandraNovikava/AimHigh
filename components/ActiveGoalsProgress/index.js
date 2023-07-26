@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 export default function ActiveGoalsProgress({ uncheckedGoals }) {
   const { markedDays, setMarkedDays } = useContext(MarkedDaysContext);
   const [markedDaysCount, setMarkedDaysCount] = useState({});
-  console.log(uncheckedGoals);
+
   useEffect(() => {
     const countMarkedDays = () => {
       const count = {};
@@ -17,27 +17,24 @@ export default function ActiveGoalsProgress({ uncheckedGoals }) {
       });
       setMarkedDaysCount(count);
     };
-
     countMarkedDays();
   }, [markedDays]);
-  console.log("markedDaysCount", markedDaysCount);
-  console.log("markedDays", markedDays);
+
   return (
     <>
       <StyledList>
-        {uncheckedGoals.map((goal) =>
-          goal.interval ? (
-            <StyledCard key={goal.id} backgroundcolor="#fff">
-              <ProgressPreview
-                image={goal.icon}
-                title={goal.name}
-                markedDaysCount={markedDaysCount}
-                uncheckedGoalId={goal.id}
-                goal={goal}
-              />
-            </StyledCard>
-          ) : null
-        )}
+        {uncheckedGoals.map((goal) => (
+          <StyledCard key={goal.id} backgroundcolor="#fff">
+            <ProgressPreview
+              image={goal.icon}
+              title={goal.name}
+              markedDaysCount={markedDaysCount}
+              uncheckedGoalId={goal.id}
+              goal={goal}
+              isDeadlineTab={false}
+            />
+          </StyledCard>
+        ))}
       </StyledList>
     </>
   );

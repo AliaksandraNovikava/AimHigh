@@ -15,29 +15,33 @@ export default function ProgressPreview({
   markedDaysCount,
   uncheckedGoalId,
   goal,
+  isDeadlineTab,
 }) {
-  console.log(goal.deadline);
   const deadlineDate = parseISO(goal.deadline);
   const daysLeft = differenceInDays(deadlineDate, new Date());
-  console.log("Days left:", daysLeft);
+
   return (
     <StyledBox alignitems="center">
       <StyledCardContent>
         <StyledImage src={image} alt={title} width={30} height={30} />
-        <StyledTitle fontsize="0.9em">{title}</StyledTitle>
+        <StyledTitle fontSize="0.9em">{title}</StyledTitle>
       </StyledCardContent>
-      {goal.interval && (
+      {goal.interval && !isDeadlineTab && (
         <StyledIconBox width="15%">
-          <StyledBox alignitems="center" justifycontent="center">
+          <StyledBox alignitems="center" justifycontent="space-evenly">
             <Icon path={mdiFire} size={1} color="#f14c01" />
             <p>{markedDaysCount[uncheckedGoalId] || 0}</p>
           </StyledBox>
         </StyledIconBox>
       )}
-      {goal.deadline && (
+      {goal.deadline && isDeadlineTab && (
         <StyledIconBox width="35%">
-          <StyledBox alignitems="center" justifycontent="center">
-            <Icon path={mdiTimer} size={1} color="#f14c01" />
+          <StyledBox alignitems="center" justifycontent="space-evenly">
+            {daysLeft < 7 ? (
+              <Icon path={mdiTimer} size={1} color="#f14c01" />
+            ) : (
+              <Icon path={mdiTimer} size={1} />
+            )}
             <p>D-{daysLeft}</p>
           </StyledBox>
         </StyledIconBox>

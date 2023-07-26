@@ -5,7 +5,7 @@ import { mdiCheckCircleOutline, mdiCheckCircle } from "@mdi/js";
 
 export const StyledTitle = styled.p`
   margin: 0;
-  font-size: ${(props) => props.fontsize};
+  font-size: ${(props) => props.fontSize};
 `;
 
 const StyledDate = styled.p`

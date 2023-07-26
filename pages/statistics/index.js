@@ -70,11 +70,7 @@ const Tab = styled.div`
   }
 `;
 
-export default function StatisticsPage({
-  newGoal,
-  uncheckedGoals,
-  checkedGoals,
-}) {
+export default function StatisticsPage({ uncheckedGoals, checkedGoals }) {
   return (
     <>
       <StyledHeading>Statistics</StyledHeading>

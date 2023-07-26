@@ -2,11 +2,33 @@ import styled from "styled-components";
 import Image from "next/image";
 import Button from "../Button";
 import Modal from "../Modal";
+import { StyledCloseButton } from "../NewGoalDetails";
 
 export const StyledGoalText = styled.p`
   font-size: 1.2em;
   font-weight: bold;
   margin: 0.5em;
+`;
+
+const StyledForm = styled.form`
+  display: flex;
+  gap: 0.6em;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const CounterBox = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 7px;
+`;
+
+const Counter = styled.button`
+  border-radius: 30%;
+  font-size: 1.3rem;
+  width: 30px;
+  height: 30px;
+  border: none;
 `;
 
 export default function NewGoalForm({
@@ -23,154 +45,157 @@ export default function NewGoalForm({
     <>
       {isModalOpen && (
         <Modal position="fixed" top="10%" closeModal={closeModal}>
-          <form onSubmit={handleAddGoal}>
-            {selectedGoal ? (
-              <>
-                <Image
-                  src={selectedGoal.icon}
-                  alt={selectedGoal.name}
-                  width={40}
-                  height={40}
-                />
-                <StyledGoalText>{selectedGoal.description}</StyledGoalText>
-                <div>
-                  <button
-                    type="button"
-                    onClick={() =>
-                      handleTargetPerIntervalChange(
-                        newGoal.targetPerInterval < 2
-                          ? 1
-                          : newGoal.targetPerInterval - 1
-                      )
-                    }
-                  >
-                    -
-                  </button>
-                  <span>{newGoal.targetPerInterval}</span>
-                  <button
-                    type="button"
-                    onClick={() =>
-                      handleTargetPerIntervalChange(
-                        newGoal.targetPerInterval + 1
-                      )
-                    }
-                  >
-                    +
-                  </button>
-                </div>
-
-                <div>
-                  <label htmlFor="intervalSelect">times a </label>
-                  <select
-                    name="interval"
-                    id="intervalSelect"
-                    value={newGoal.interval}
-                    onChange={handleInputChange}
-                  >
-                    <option value="day">Day</option>
-                    <option value="week">Week</option>
-                    <option value="month">Month</option>
-                  </select>
-                </div>
-              </>
-            ) : (
-              <>
-                <Image
-                  src="/icons/icons8-bullseye-48.png"
-                  alt="your new goal"
-                  width={40}
-                  height={40}
-                />
-                <div>
-                  <label htmlFor="newGoalInput">I want to</label>
-                  <br></br>
-                  <input
-                    type="text"
-                    id="newGoalInput"
-                    value={newGoal.myGoal}
-                    onChange={(event) => handleUserInput(event)}
-                    required
+          <>
+            <StyledCloseButton onClick={closeModal}>⨉</StyledCloseButton>
+            <StyledForm onSubmit={handleAddGoal}>
+              {selectedGoal ? (
+                <>
+                  <Image
+                    src={selectedGoal.icon}
+                    alt={selectedGoal.name}
+                    width={40}
+                    height={40}
                   />
-                </div>
-                <div>
-                  <label htmlFor="repetitionCheckbox">set repetition:</label>
-                  <input
-                    name="repetition"
-                    type="checkbox"
-                    id="repetitionCheckbox"
-                    checked={newGoal.repetition}
-                    onChange={handleInputChange}
+                  <StyledGoalText>{selectedGoal.description}</StyledGoalText>
+                  <CounterBox>
+                    <Counter
+                      type="button"
+                      onClick={() =>
+                        handleTargetPerIntervalChange(
+                          newGoal.targetPerInterval < 2
+                            ? 1
+                            : newGoal.targetPerInterval - 1
+                        )
+                      }
+                    >
+                      -
+                    </Counter>
+                    <span>{newGoal.targetPerInterval}</span>
+                    <Counter
+                      type="button"
+                      onClick={() =>
+                        handleTargetPerIntervalChange(
+                          newGoal.targetPerInterval + 1
+                        )
+                      }
+                    >
+                      +
+                    </Counter>
+                  </CounterBox>
+
+                  <div>
+                    <label htmlFor="intervalSelect">times a </label>
+                    <select
+                      name="interval"
+                      id="intervalSelect"
+                      value={newGoal.interval}
+                      onChange={handleInputChange}
+                    >
+                      <option value="day">Day</option>
+                      <option value="week">Week</option>
+                      <option value="month">Month</option>
+                    </select>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <Image
+                    src="/icons/icons8-bullseye-48.png"
+                    alt="your new goal"
+                    width={40}
+                    height={40}
                   />
-                </div>
-                {newGoal.repetition && (
-                  <>
-                    <div>
-                      <button
-                        type="button"
-                        onClick={() =>
-                          handleTargetPerIntervalChange(
-                            newGoal.targetPerInterval < 2
-                              ? 1
-                              : newGoal.targetPerInterval - 1
-                          )
-                        }
-                      >
-                        -
-                      </button>
-                      <span>{newGoal.targetPerInterval}</span>
-                      <button
-                        type="button"
-                        onClick={() =>
-                          handleTargetPerIntervalChange(
-                            newGoal.targetPerInterval + 1
-                          )
-                        }
-                      >
-                        +
-                      </button>
-                    </div>
+                  <div>
+                    <label htmlFor="newGoalInput">I want to</label>
+                    <br></br>
+                    <input
+                      type="text"
+                      id="newGoalInput"
+                      value={newGoal.myGoal}
+                      onChange={(event) => handleUserInput(event)}
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="repetitionCheckbox">set repetition:</label>
+                    <input
+                      name="repetition"
+                      type="checkbox"
+                      id="repetitionCheckbox"
+                      checked={newGoal.repetition}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                  {newGoal.repetition && (
+                    <>
+                      <CounterBox>
+                        <Counter
+                          type="button"
+                          onClick={() =>
+                            handleTargetPerIntervalChange(
+                              newGoal.targetPerInterval < 2
+                                ? 1
+                                : newGoal.targetPerInterval - 1
+                            )
+                          }
+                        >
+                          -
+                        </Counter>
+                        <span>{newGoal.targetPerInterval}</span>
+                        <Counter
+                          type="button"
+                          onClick={() =>
+                            handleTargetPerIntervalChange(
+                              newGoal.targetPerInterval + 1
+                            )
+                          }
+                        >
+                          +
+                        </Counter>
+                      </CounterBox>
 
-                    <div>
-                      <label htmlFor="intervalSelect">times a </label>
-                      <select
-                        name="interval"
-                        id="intervalSelect"
-                        value={newGoal.interval}
-                        onChange={handleInputChange}
-                      >
-                        <option value="day">Day</option>
-                        <option value="week">Week</option>
-                        <option value="month">Month</option>
-                      </select>
-                    </div>
-                  </>
-                )}
-              </>
-            )}
+                      <div>
+                        <label htmlFor="intervalSelect">times a </label>
+                        <select
+                          name="interval"
+                          id="intervalSelect"
+                          value={newGoal.interval}
+                          onChange={handleInputChange}
+                        >
+                          <option value="day">Day</option>
+                          <option value="week">Week</option>
+                          <option value="month">Month</option>
+                        </select>
+                      </div>
+                    </>
+                  )}
+                </>
+              )}
 
-            <div>
-              <label htmlFor="setDeadlineCheckbox">set deadline</label>
-              <input
-                name="deadlineVisible"
-                type="checkbox"
-                id="setDeadlineCheckbox"
-                checked={newGoal.deadlineVisible}
-                onChange={handleInputChange}
-              />
-            </div>
-            {newGoal.deadlineVisible && (
               <div>
+                <label htmlFor="setDeadlineCheckbox">set deadline</label>
                 <input
-                  name="deadline"
-                  type="date"
-                  id="deadlineInput"
-                  value={newGoal.deadline}
+                  name="deadlineVisible"
+                  type="checkbox"
+                  id="setDeadlineCheckbox"
+                  checked={newGoal.deadlineVisible}
                   onChange={handleInputChange}
                 />
               </div>
-            )}
-            <Button type="submit">Add your goal</Button>
-          </form>
+              {newGoal.deadlineVisible && (
+                <div>
+                  <input
+                    name="deadline"
+                    type="date"
+                    id="deadlineInput"
+                    value={newGoal.deadline}
+                    onChange={handleInputChange}
+                  />
+                </div>
+              )}
+              <Button type="submit">Add your goal</Button>
+            </StyledForm>
+          </>
         </Modal>
       )}
     </>

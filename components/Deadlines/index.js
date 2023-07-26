@@ -2,21 +2,22 @@ import { StyledList, StyledCard } from "../NewGoalsList";
 import ProgressPreview from "../ProgressPreview";
 
 export default function Deadlines({ uncheckedGoals }) {
+  const goalsWithDeadline = uncheckedGoals.filter((goal) => goal.deadline);
+
   return (
     <>
       <StyledList>
-        {uncheckedGoals.map((goal) =>
-          goal.deadline ? (
-            <StyledCard key={goal.id} backgroundcolor="#fff">
-              <ProgressPreview
-                image={goal.icon}
-                title={goal.name}
-                uncheckedGoalId={goal.id}
-                goal={goal}
-              />
-            </StyledCard>
-          ) : null
-        )}
+        {goalsWithDeadline.map((goal) => (
+          <StyledCard key={goal.id} backgroundcolor="#fff">
+            <ProgressPreview
+              image={goal.icon}
+              title={goal.name}
+              uncheckedGoalId={goal.id}
+              goal={goal}
+              isDeadlineTab={true}
+            />
+          </StyledCard>
+        ))}
       </StyledList>
     </>
   );
