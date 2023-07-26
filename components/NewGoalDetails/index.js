@@ -40,12 +40,6 @@ export default function NewGoalDetails({
   onEdit,
   isEditing,
 }) {
-  // PLEASE NOTE:
-  // I (wanted but) couldn't use useLocalStorageState with the DayPicker state variable "days".
-  // The component wouldn't work if I implemeted this hook.
-  // That's why until I've found a solution for this problem, all clicked days are saved in the markedDays variable.
-  // There're some other problems related to the DayPicker component that are visible in the frontend. Please ignore them for now.
-
   let goalContent;
   let goalDeadline;
   let editButtons;
@@ -71,7 +65,10 @@ export default function NewGoalDetails({
             <option value="month">Month</option>
           </select>
         </div>
-        <DayPickerCalendar isModalOpen={isModalOpen} />
+        <DayPickerCalendar
+          isModalOpen={isModalOpen}
+          selectedGoal={selectedGoal}
+        />
       </>
     );
     goalDeadline = (
@@ -95,7 +92,10 @@ export default function NewGoalDetails({
     goalContent = (
       <>
         {selectedGoal.targetPerInterval} time(s) a {selectedGoal.interval}
-        <DayPickerCalendar isModalOpen={isModalOpen} />
+        <DayPickerCalendar
+          isModalOpen={isModalOpen}
+          selectedGoal={selectedGoal}
+        />
       </>
     );
     goalDeadline = (

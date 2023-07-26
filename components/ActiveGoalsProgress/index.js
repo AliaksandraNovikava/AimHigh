@@ -5,7 +5,6 @@ import { MarkedDaysContext } from "../DayPickerCalendar";
 import { useEffect, useState } from "react";
 
 export default function ActiveGoalsProgress({ uncheckedGoals }) {
-  //   const uncheckedGoals = newGoalsEntries.filter((goal) => !goal.isChecked);
   const { markedDays, setMarkedDays } = useContext(MarkedDaysContext);
   const [markedDaysCount, setMarkedDaysCount] = useState({});
   console.log(uncheckedGoals);
