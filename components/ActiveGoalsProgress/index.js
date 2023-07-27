@@ -1,11 +1,10 @@
 import { StyledList, StyledCard } from "../NewGoalsList";
 import ProgressPreview from "../ProgressPreview";
 import { useContext } from "react";
-import { MarkedDaysContext } from "../NewGoalDetails";
+import { MarkedDaysContext } from "../DayPickerCalendar";
 import { useEffect, useState } from "react";
 
-export default function ActiveGoalsProgress({ newGoalsEntries }) {
-  const uncheckedGoals = newGoalsEntries.filter((goal) => !goal.isChecked);
+export default function ActiveGoalsProgress({ uncheckedGoals }) {
   const { markedDays, setMarkedDays } = useContext(MarkedDaysContext);
   const [markedDaysCount, setMarkedDaysCount] = useState({});
 
@@ -18,7 +17,6 @@ export default function ActiveGoalsProgress({ newGoalsEntries }) {
       });
       setMarkedDaysCount(count);
     };
-
     countMarkedDays();
   }, [markedDays]);
 
@@ -32,6 +30,8 @@ export default function ActiveGoalsProgress({ newGoalsEntries }) {
               title={goal.name}
               markedDaysCount={markedDaysCount}
               uncheckedGoalId={goal.id}
+              goal={goal}
+              isDeadlineTab={false}
             />
           </StyledCard>
         ))}

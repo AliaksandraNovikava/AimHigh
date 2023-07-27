@@ -1,48 +1,34 @@
 import styled from "styled-components";
 import Image from "next/image";
 import Button from "../Button";
-
-export const StyledModalBody = styled.section`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`;
-
-export const StyledModal = styled.section`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  position: ${(props) => props.position};
-  top: ${(props) => props.top};
-  gap: 0.4rem;
-  width: 330px;
-  padding: 1.3rem;
-  min-height: 250px;
-  background-color: white;
-  border: 1px solid #ddd;
-  border-radius: 15px;
-  z-index: 22;
-`;
-
-export const StyledOverlay = styled.section`
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 21;
-`;
+import Modal from "../Modal";
+import { StyledCloseButton } from "../NewGoalDetails";
 
 export const StyledGoalText = styled.p`
   font-size: 1.2em;
   font-weight: bold;
   margin: 0.5em;
+`;
+
+const StyledForm = styled.form`
+  display: flex;
+  gap: 0.6em;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const CounterBox = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 7px;
+`;
+
+const Counter = styled.button`
+  border-radius: 30%;
+  font-size: 1.3rem;
+  width: 30px;
+  height: 30px;
+  border: none;
 `;
 
 export default function NewGoalForm({
@@ -58,9 +44,10 @@ export default function NewGoalForm({
   return (
     <>
       {isModalOpen && (
-        <StyledModalBody>
-          <StyledModal position="fixed" top="10%" hidden>
-            <form onSubmit={handleAddGoal}>
+        <Modal position="fixed" top="10%" closeModal={closeModal}>
+          <>
+            <StyledCloseButton onClick={closeModal}>⨉</StyledCloseButton>
+            <StyledForm onSubmit={handleAddGoal}>
               {selectedGoal ? (
                 <>
                   <Image
@@ -70,8 +57,8 @@ export default function NewGoalForm({
                     height={40}
                   />
                   <StyledGoalText>{selectedGoal.description}</StyledGoalText>
-                  <div>
-                    <button
+                  <CounterBox>
+                    <Counter
                       type="button"
                       onClick={() =>
                         handleTargetPerIntervalChange(
@@ -82,9 +69,9 @@ export default function NewGoalForm({
                       }
                     >
                       -
-                    </button>
+                    </Counter>
                     <span>{newGoal.targetPerInterval}</span>
-                    <button
+                    <Counter
                       type="button"
                       onClick={() =>
                         handleTargetPerIntervalChange(
@@ -93,8 +80,8 @@ export default function NewGoalForm({
                       }
                     >
                       +
-                    </button>
-                  </div>
+                    </Counter>
+                  </CounterBox>
 
                   <div>
                     <label htmlFor="intervalSelect">times a </label>
@@ -141,8 +128,8 @@ export default function NewGoalForm({
                   </div>
                   {newGoal.repetition && (
                     <>
-                      <div>
-                        <button
+                      <CounterBox>
+                        <Counter
                           type="button"
                           onClick={() =>
                             handleTargetPerIntervalChange(
@@ -153,9 +140,9 @@ export default function NewGoalForm({
                           }
                         >
                           -
-                        </button>
+                        </Counter>
                         <span>{newGoal.targetPerInterval}</span>
-                        <button
+                        <Counter
                           type="button"
                           onClick={() =>
                             handleTargetPerIntervalChange(
@@ -164,8 +151,8 @@ export default function NewGoalForm({
                           }
                         >
                           +
-                        </button>
-                      </div>
+                        </Counter>
+                      </CounterBox>
 
                       <div>
                         <label htmlFor="intervalSelect">times a </label>
@@ -207,10 +194,9 @@ export default function NewGoalForm({
                 </div>
               )}
               <Button type="submit">Add your goal</Button>
-            </form>
-          </StyledModal>
-          <StyledOverlay onClick={closeModal} />
-        </StyledModalBody>
+            </StyledForm>
+          </>
+        </Modal>
       )}
     </>
   );

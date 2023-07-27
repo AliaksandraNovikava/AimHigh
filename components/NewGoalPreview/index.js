@@ -5,7 +5,7 @@ import { mdiCheckCircleOutline, mdiCheckCircle } from "@mdi/js";
 
 export const StyledTitle = styled.p`
   margin: 0;
-  font-size: ${(props) => props.fontsize};
+  font-size: ${(props) => props.fontSize};
 `;
 
 const StyledDate = styled.p`
@@ -32,7 +32,7 @@ export const StyledImage = styled(Image)`
 `;
 
 export const StyledIconBox = styled.div`
-  width: 15%;
+  width: ${(props) => props.width};
   text-align: end;
   cursor: pointer;
   z-index: 10;
@@ -58,7 +58,7 @@ export default function NewGoalPreview({
           <StyledDate>Created on {creationDate}</StyledDate>
         </div>
       </StyledCardContent>
-      <StyledIconBox onClick={() => handleToggleChecked(id)}>
+      <StyledIconBox onClick={() => handleToggleChecked(id)} width="15%">
         {isChecked ? (
           <Icon path={mdiCheckCircle} size={1.1} color="#aeaeae" />
         ) : (
