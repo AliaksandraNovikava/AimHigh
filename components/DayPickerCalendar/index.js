@@ -58,14 +58,12 @@ export default function DayPickerCalendar({ isModalOpen, selectedGoal }) {
     const datesStrings = days.map((day) => day.toISOString());
     localStorage.setItem("days", JSON.stringify(datesStrings));
     const markedDaysObjects = days.map((day) => ({
-      goalId: selectedGoal.id.toString(),
+      goalId: selectedGoal.id,
       date: day,
     }));
     setMarkedDays(markedDaysObjects);
   }, [days, selectedGoal]);
 
-  console.log("markedDays:", markedDays);
-  console.log("days:", days);
   const footer =
     days && days.length > 0 ? (
       <StyledDescription>
