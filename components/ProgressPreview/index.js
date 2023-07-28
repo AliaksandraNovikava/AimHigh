@@ -14,6 +14,17 @@ const PreviewBox = styled.article`
   display: flex;
 `;
 
+const Message = styled.p`
+  padding: 10px;
+  font-size: 0.9em;
+  border-radius: 10px;
+  margin: 0;
+  ${(props) =>
+    props.isintervalmet === "true"
+      ? "color: #01b62bba; background-color: #e6ffe6d9;"
+      : "color: #ff9999; background-color: #ffefef;"}
+`;
+
 export default function ProgressPreview({
   image,
   title,
@@ -65,11 +76,11 @@ export default function ProgressPreview({
       </PreviewBox>
       {showMessage && goal.id === selectedGoalId && (
         <div alignitems="center" justifycontent="space-evenly">
-          <p>
+          <Message isintervalmet={isIntervalMet.toString()}>
             {isIntervalMet
               ? "Congratulations! You have achieved your goal for the set interval."
               : "Keep pushing forward! Success is just around the corner."}
-          </p>
+          </Message>
         </div>
       )}
     </div>
