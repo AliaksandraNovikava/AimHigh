@@ -10,7 +10,7 @@ export const StyledCard = styled.article`
   margin-bottom: 15px;
   border-radius: 15px;
   background-color: ${(props) => props.backgroundcolor};
-  box-shadow: 0 2px 6px rgb(109 94 255 / 10%);
+  box-shadow: ${(props) => props.boxshadow};
 `;
 
 export default function NewGoalsList({
@@ -21,7 +21,11 @@ export default function NewGoalsList({
   return (
     <StyledList>
       {uncheckedGoals.map((goal) => (
-        <StyledCard key={goal.id} backgroundcolor="#f6f5f8">
+        <StyledCard
+          key={goal.id}
+          backgroundcolor="#f6f5f8"
+          boxshadow="0 2px 6px rgb(109 94 255 / 10%)"
+        >
           <NewGoalPreview
             image={goal.icon}
             title={goal.name}

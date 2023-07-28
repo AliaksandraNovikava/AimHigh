@@ -8,7 +8,11 @@ export default function Deadlines({ uncheckedGoals }) {
     <>
       <StyledList>
         {goalsWithDeadline.map((goal) => (
-          <StyledCard key={goal.id} backgroundcolor="#fff">
+          <StyledCard
+            key={goal.id}
+            backgroundcolor="#fff"
+            boxshadow="0 2px 6px rgb(109 94 255 / 10%)"
+          >
             <ProgressPreview
               image={goal.icon}
               title={goal.name}

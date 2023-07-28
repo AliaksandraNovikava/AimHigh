@@ -2,15 +2,22 @@ import { StyledHeading } from "..";
 import AchievementsList from "@/components/AchievementsList";
 import NewGoalDetails from "@/components/NewGoalDetails";
 
-export default function MyGoalsOPage({
+export default function AchievementsPage({
   newGoal,
-  checkedGoals,
   handleToggleChecked,
+  checkedGoals,
+  uncheckedGoals,
   isModalOpen,
   closeModal,
   handleOpenModalFromListItem,
   handleDeleteGoal,
+  handleEditChange,
+  handleSaveEdit,
   selectedGoal,
+  isEditing,
+  handleCancel,
+  handleEdit,
+  updateGoalWithDays,
 }) {
   return (
     <>
@@ -21,11 +28,17 @@ export default function MyGoalsOPage({
         onOpenModal={handleOpenModalFromListItem}
       />
       <NewGoalDetails
-        newGoalsEntries={newGoal.myNewGoals}
+        newGoal={newGoal}
         isModalOpen={isModalOpen}
         closeModal={closeModal}
         selectedGoal={selectedGoal}
         onDeleteGoal={handleDeleteGoal}
+        onEditGoal={handleEditChange}
+        onSaveEdit={handleSaveEdit}
+        onCancelEdit={handleCancel}
+        onEdit={handleEdit}
+        isEditing={isEditing}
+        updateGoalWithDays={updateGoalWithDays}
       />
     </>
   );

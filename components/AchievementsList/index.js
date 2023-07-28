@@ -9,7 +9,7 @@ export default function AchievementsList({
   return (
     <StyledList>
       {checkedGoals.map((goal) => (
-        <StyledCard key={goal.id}>
+        <StyledCard key={goal.id} boxshadow="0 2px 6px rgb(109 94 255 / 10%)">
           <NewGoalPreview
             image={goal.icon}
             title={goal.name}
