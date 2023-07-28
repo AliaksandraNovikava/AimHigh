@@ -17,6 +17,7 @@ export default function MyGoalsPage({
   isEditing,
   handleCancel,
   handleEdit,
+  updateGoalWithDays,
 }) {
   return (
     <>
@@ -27,6 +28,7 @@ export default function MyGoalsPage({
         onOpenModal={handleOpenModalFromListItem}
       />
       <NewGoalDetails
+        newGoal={newGoal}
         isModalOpen={isModalOpen}
         closeModal={closeModal}
         selectedGoal={selectedGoal}
@@ -36,6 +38,7 @@ export default function MyGoalsPage({
         onCancelEdit={handleCancel}
         onEdit={handleEdit}
         isEditing={isEditing}
+        updateGoalWithDays={updateGoalWithDays}
       />
     </>
   );

@@ -8,10 +8,11 @@ import "react-confirm-alert/src/react-confirm-alert.css";
 import Navigation from "@/components/Navigation";
 import { MarkedDaysProvider } from "@/components/DayPickerCalendar";
 
+// import { useContext } from "react";
+// import { MarkedDaysContext } from "@/components/DayPickerCalendar";
+
 export default function App({ Component, pageProps }) {
-  const [isModalOpen, setIsModalOpen] = useLocalStorageState("isModalOpen", {
-    defaultValue: false,
-  });
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedGoal, setSelectedGoal] = useLocalStorageState(
     "selected Goal",
     { defaultValue: null }
@@ -29,6 +30,9 @@ export default function App({ Component, pageProps }) {
   });
   const [isEditing, setIsEditing] = useState(false);
   const [editedValue, setEditedValue] = useState("");
+
+  // const { days } = useContext(MarkedDaysContext);
+
   const initialValue = selectedGoal;
   const myGoalsArray = newGoal.myNewGoals;
   const checkedGoals = myGoalsArray.filter((goal) => goal.isChecked);
@@ -216,6 +220,21 @@ export default function App({ Component, pageProps }) {
     setIsEditing(false);
   }
 
+  function updateGoalWithDays(selectedGoalId, days) {
+    setNewGoal((prevGoal) => {
+      const updatedMyNewGoals = prevGoal.myNewGoals.map((goal) => {
+        if (goal.id === selectedGoalId) {
+          return { ...goal, days };
+        }
+        return goal;
+      });
+      return {
+        ...prevGoal,
+        myNewGoals: updatedMyNewGoals,
+      };
+    });
+  }
+
   return (
     <>
       <GlobalStyle />
@@ -243,6 +262,7 @@ export default function App({ Component, pageProps }) {
           isEditing={isEditing}
           handleCancel={handleCancel}
           handleEdit={handleEdit}
+          updateGoalWithDays={updateGoalWithDays}
         />
       </MarkedDaysProvider>
       <Navigation />

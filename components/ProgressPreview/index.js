@@ -19,6 +19,7 @@ export default function ProgressPreview({
 }) {
   const deadlineDate = parseISO(goal.deadline);
   const daysLeft = differenceInDays(deadlineDate, new Date());
+  const absoluteDaysLeft = Math.abs(daysLeft);
 
   return (
     <StyledBox alignitems="center">
@@ -37,12 +38,14 @@ export default function ProgressPreview({
       {goal.deadline && isDeadlineTab && (
         <StyledIconBox width="35%">
           <StyledBox alignitems="center" justifycontent="space-evenly">
-            {daysLeft < 7 ? (
-              <Icon path={mdiTimer} size={1} color="#f14c01" />
-            ) : (
-              <Icon path={mdiTimer} size={1} />
-            )}
-            <p>D-{daysLeft}</p>
+            <Icon
+              path={mdiTimer}
+              size={1}
+              color={
+                daysLeft >= 7 ? "#000" : daysLeft >= 0 ? "#f14c01" : "#aeaeae"
+              }
+            />
+            {daysLeft >= 0 ? <p>D-{daysLeft}</p> : <p>D+{absoluteDaysLeft}</p>}
           </StyledBox>
         </StyledIconBox>
       )}

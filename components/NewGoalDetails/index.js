@@ -30,6 +30,7 @@ const StyledInput = styled.input`
 `;
 
 export default function NewGoalDetails({
+  newGoal,
   isModalOpen,
   closeModal,
   selectedGoal,
@@ -39,6 +40,7 @@ export default function NewGoalDetails({
   onCancelEdit,
   onEdit,
   isEditing,
+  updateGoalWithDays,
 }) {
   let goalContent;
   let goalDeadline;
@@ -68,6 +70,8 @@ export default function NewGoalDetails({
         <DayPickerCalendar
           isModalOpen={isModalOpen}
           selectedGoal={selectedGoal}
+          updateGoalWithDays={updateGoalWithDays}
+          newGoal={newGoal}
         />
       </>
     );
@@ -95,6 +99,8 @@ export default function NewGoalDetails({
         <DayPickerCalendar
           isModalOpen={isModalOpen}
           selectedGoal={selectedGoal}
+          updateGoalWithDays={updateGoalWithDays}
+          newGoal={newGoal}
         />
       </>
     );

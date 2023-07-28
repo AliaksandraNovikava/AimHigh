@@ -7,18 +7,33 @@ import { useEffect, useState } from "react";
 export default function ActiveGoalsProgress({ uncheckedGoals }) {
   const { markedDays, setMarkedDays } = useContext(MarkedDaysContext);
   const [markedDaysCount, setMarkedDaysCount] = useState({});
+  //   useEffect(() => {
+  //     const countMarkedDays = () => {
+  //       const count = {};
+  //       markedDays?.forEach((markedDay) => {
+  //         const { goalId } = markedDay;
+  //         count[goalId] = (count[goalId] || 0) + 1;
+  //       });
+  //       setMarkedDaysCount(count);
+  //     };
+  //     countMarkedDays();
+  //   }, [markedDays]);
 
   useEffect(() => {
     const countMarkedDays = () => {
       const count = {};
-      markedDays?.forEach((markedDay) => {
-        const { goalId } = markedDay;
-        count[goalId] = (count[goalId] || 0) + 1;
+      uncheckedGoals?.forEach((goal) => {
+        const { id, days } = goal;
+        if (days && Array.isArray(days)) {
+          count[id] = days.length;
+        } else {
+          count[id] = 0;
+        }
       });
       setMarkedDaysCount(count);
     };
     countMarkedDays();
-  }, [markedDays]);
+  }, [uncheckedGoals]);
 
   return (
     <>
