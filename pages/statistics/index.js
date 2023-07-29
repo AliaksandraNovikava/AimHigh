@@ -72,6 +72,11 @@ const Tab = styled.div`
   }
 `;
 
+export const EmptyStateMessage = styled.p`
+  font-size: 0.9em;
+  color: #8e8e93;
+`;
+
 export default function StatisticsPage({ uncheckedGoals, checkedGoals }) {
   const [selectedTab, setSelectedTab] = useState("progress");
   function handleTabChange(event) {

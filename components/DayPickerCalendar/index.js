@@ -38,7 +38,6 @@ export const MarkedDaysProvider = ({ children }) => {
 };
 
 export default function DayPickerCalendar({
-  newGoal,
   isModalOpen,
   selectedGoal,
   updateGoalWithDays,
