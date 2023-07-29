@@ -27,10 +27,11 @@ export default function ActiveGoalsProgress({ uncheckedGoals }) {
     const startDate = new Date(
       currentDate.getTime() - intervalToMilliseconds(interval)
     );
-
-    const datesWithinInterval = days.filter(
-      (day) => new Date(day) >= startDate && new Date(day) <= currentDate
-    );
+    const datesWithinInterval = Array.isArray(days)
+      ? days.filter(
+          (day) => new Date(day) >= startDate && new Date(day) <= currentDate
+        )
+      : [];
 
     return datesWithinInterval.length >= targetPerInterval;
   }
@@ -63,30 +64,33 @@ export default function ActiveGoalsProgress({ uncheckedGoals }) {
             goal.targetPerInterval,
             goal.days
           );
-          return (
-            <StyledCard
-              key={goal.id}
-              backgroundcolor="#fff"
-              boxshadow={
-                isIntervalMet
-                  ? "0 2px 6px rgba(51, 201, 39, 0.23)"
-                  : "0 2px 6px rgba(255, 94, 94, 0.23)"
-              }
-              onClick={() => handleToggleMessage(goal.id)}
-            >
-              <ProgressPreview
-                image={goal.icon}
-                title={goal.name}
-                markedDaysCount={markedDaysCount}
-                uncheckedGoalId={goal.id}
-                goal={goal}
-                isDeadlineTab={false}
-                isIntervalMet={isIntervalMet}
-                showMessage={goal.id === selectedGoalId}
-                selectedGoalId={selectedGoalId}
-              />
-            </StyledCard>
-          );
+          if (goal.hasOwnProperty("interval") && goal.interval !== null) {
+            return (
+              <StyledCard
+                key={goal.id}
+                backgroundcolor="#fff"
+                boxshadow={
+                  isIntervalMet
+                    ? "0 2px 6px rgba(51, 201, 39, 0.23)"
+                    : "0 2px 6px rgba(255, 94, 94, 0.23)"
+                }
+                onClick={() => handleToggleMessage(goal.id)}
+              >
+                <ProgressPreview
+                  image={goal.icon}
+                  title={goal.name}
+                  markedDaysCount={markedDaysCount}
+                  uncheckedGoalId={goal.id}
+                  goal={goal}
+                  isDeadlineTab={false}
+                  isIntervalMet={isIntervalMet}
+                  showMessage={goal.id === selectedGoalId}
+                  selectedGoalId={selectedGoalId}
+                />
+              </StyledCard>
+            );
+          }
+          return null;
         })}
       </StyledList>
     </>
