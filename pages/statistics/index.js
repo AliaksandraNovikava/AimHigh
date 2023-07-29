@@ -75,7 +75,7 @@ const Tab = styled.div`
 export const EmptyStateMessage = styled.p`
   font-size: 0.9em;
   color: #8e8e93;
-  margin-bottom: 30px;
+  margin: ${(props) => props.margin};
 `;
 
 export default function StatisticsPage({ uncheckedGoals, checkedGoals }) {

@@ -2,6 +2,8 @@ import { StyledList, StyledCard } from "../NewGoalsList";
 import { EmptyStateMessage } from "@/pages/statistics";
 import ProgressPreview from "../ProgressPreview";
 import { useEffect, useState } from "react";
+import Lottie from "lottie-react";
+import animation from "@/public/animation/meditation.json";
 
 export default function ActiveGoalsProgress({ uncheckedGoals }) {
   const [markedDaysCount, setMarkedDaysCount] = useState({});
@@ -99,9 +101,16 @@ export default function ActiveGoalsProgress({ uncheckedGoals }) {
         })}
         {goalsWithInterval.length === 0 && (
           <div>
-            <EmptyStateMessage>
+            <EmptyStateMessage margin="0">
               No goals set for progress yet.
             </EmptyStateMessage>
+            <Lottie
+              animationData={animation}
+              loop={true}
+              autoplay={true}
+              speed={0.5}
+              style={{ maxWidth: "400px" }}
+            />
           </div>
         )}
       </StyledList>

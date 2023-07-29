@@ -1,6 +1,8 @@
 import { StyledList, StyledCard } from "../NewGoalsList";
 import { EmptyStateMessage } from "@/pages/statistics";
 import ProgressPreview from "../ProgressPreview";
+import Lottie from "lottie-react";
+import animation from "@/public/animation/meditation.json";
 
 export default function Deadlines({ uncheckedGoals }) {
   const goalsWithDeadline = uncheckedGoals.filter(
@@ -28,7 +30,16 @@ export default function Deadlines({ uncheckedGoals }) {
         ))}
         {goalsWithDeadline.length === 0 && (
           <div>
-            <EmptyStateMessage>No deadlines set yet.</EmptyStateMessage>
+            <EmptyStateMessage margin="0">
+              No deadlines set yet.
+            </EmptyStateMessage>
+            <Lottie
+              animationData={animation}
+              loop={true}
+              autoplay={true}
+              speed={0.5}
+              style={{ maxWidth: "400px" }}
+            />
           </div>
         )}
       </StyledList>

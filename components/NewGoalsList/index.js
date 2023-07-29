@@ -55,17 +55,20 @@ export default function NewGoalsList({
       ))}
       {uncheckedGoals.length === 0 && (
         <div>
-          <EmptyStateMessage>
+          <EmptyStateMessage margin="0 0 30px">
             No goals set yet. <br></br>Start by setting your first goal and{" "}
             <strong>aim high</strong>!
           </EmptyStateMessage>
           <LinkButton href="/">Get started</LinkButton>
-          <Lottie
-            animationData={animation}
-            loop={false}
-            autoplay={true}
-            speed={0.5}
-          />
+          <div>
+            <Lottie
+              animationData={animation}
+              loop={false}
+              autoplay={true}
+              speed={0.5}
+              style={{ maxWidth: "400px" }}
+            />
+          </div>
         </div>
       )}
     </StyledList>

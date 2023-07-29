@@ -36,6 +36,7 @@ export default function AchievementsList({
             loop={false}
             autoplay={true}
             speed={0.5}
+            style={{ maxWidth: "400px" }}
           />
         </div>
       )}
