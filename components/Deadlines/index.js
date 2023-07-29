@@ -2,7 +2,10 @@ import { StyledList, StyledCard } from "../NewGoalsList";
 import ProgressPreview from "../ProgressPreview";
 
 export default function Deadlines({ uncheckedGoals }) {
-  const goalsWithDeadline = uncheckedGoals.filter((goal) => goal.deadline);
+  //   const goalsWithDeadline = uncheckedGoals.filter((goal) => goal.deadline);
+  const goalsWithDeadline = uncheckedGoals.filter(
+    (goal) => goal.deadline !== undefined
+  );
 
   return (
     <>
