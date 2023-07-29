@@ -1,7 +1,7 @@
 import { useState, useEffect, createContext } from "react";
 import useLocalStorageState from "use-local-storage-state";
 import { DayPicker } from "react-day-picker";
-import { isSameDay, parseISO } from "date-fns";
+import { parseISO } from "date-fns";
 import "react-day-picker/dist/style.css";
 import styled from "styled-components";
 
@@ -37,12 +37,14 @@ export const MarkedDaysProvider = ({ children }) => {
   );
 };
 
-export default function DayPickerCalendar({ isModalOpen, selectedGoal }) {
+export default function DayPickerCalendar({
+  newGoal,
+  isModalOpen,
+  selectedGoal,
+  updateGoalWithDays,
+}) {
   const initialDays = [];
   const [days, setDays] = useState(initialDays);
-  const [markedDays, setMarkedDays] = useLocalStorageState("markedDays", {
-    defaultValue: [],
-  });
 
   useEffect(() => {
     if (isModalOpen) {
@@ -55,13 +57,13 @@ export default function DayPickerCalendar({ isModalOpen, selectedGoal }) {
   }, [isModalOpen]);
 
   useEffect(() => {
+    const selectedGoalId = selectedGoal.id;
+    updateGoalWithDays(selectedGoalId, days);
     const datesStrings = days.map((day) => day.toISOString());
-    localStorage.setItem("days", JSON.stringify(datesStrings));
-    const markedDaysObjects = days.map((day) => ({
-      goalId: selectedGoal.id,
-      date: day,
-    }));
-    setMarkedDays(markedDaysObjects);
+    localStorage.setItem(
+      `days-${selectedGoalId}`,
+      JSON.stringify(datesStrings)
+    );
   }, [days, selectedGoal]);
 
   const footer =

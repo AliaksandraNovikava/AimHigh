@@ -3,6 +3,7 @@ import ActiveGoalsProgress from "@/components/ActiveGoalsProgress";
 import Deadlines from "@/components/Deadlines";
 import { StyledHeading } from "..";
 import styled from "styled-components";
+import { useState } from "react";
 
 const Tabs = styled.div`
   display: flex;
@@ -71,6 +72,10 @@ const Tab = styled.div`
 `;
 
 export default function StatisticsPage({ uncheckedGoals, checkedGoals }) {
+  const [selectedTab, setSelectedTab] = useState("progress");
+  function handleTabChange(event) {
+    setSelectedTab(event.target.value);
+  }
   return (
     <>
       <StyledHeading>Statistics</StyledHeading>
@@ -82,14 +87,28 @@ export default function StatisticsPage({ uncheckedGoals, checkedGoals }) {
       <Tabs>
         <Tab>
           <TabLabel htmlFor="progress">My Progress</TabLabel>
-          <TabInput id="progress" name="statistics" type="radio" checked />
+          <TabInput
+            id="progress"
+            name="statistics"
+            type="radio"
+            value="progress"
+            checked={selectedTab === "progress"}
+            onChange={handleTabChange}
+          />
           <TabContent>
             <ActiveGoalsProgress uncheckedGoals={uncheckedGoals} />
           </TabContent>
         </Tab>
         <Tab>
           <TabLabel htmlFor="deadlines">Deadlines</TabLabel>
-          <TabInput id="deadlines" name="statistics" type="radio" />
+          <TabInput
+            id="deadlines"
+            name="statistics"
+            type="radio"
+            value="deadlines"
+            checked={selectedTab === "deadlines"}
+            onChange={handleTabChange}
+          />
           <TabContent>
             <Deadlines uncheckedGoals={uncheckedGoals} />
           </TabContent>
