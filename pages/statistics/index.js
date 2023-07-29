@@ -4,6 +4,7 @@ import Deadlines from "@/components/Deadlines";
 import { StyledHeading } from "..";
 import styled from "styled-components";
 import { useState } from "react";
+import Head from "next/head";
 
 const Tabs = styled.div`
   display: flex;
@@ -78,6 +79,15 @@ export default function StatisticsPage({ uncheckedGoals, checkedGoals }) {
   }
   return (
     <>
+      <Head>
+        <title>AimHigh: Goal Statistics and Progress Tracking</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta
+          name="description"
+          content="Track your progress and statistics. AimHigh provides insights and data to help you stay focused and motivated. Start visualizing your success today!"
+        />
+      </Head>
+
       <StyledHeading>Statistics</StyledHeading>
       <SetGoalsStatistics
         checkedGoals={checkedGoals}

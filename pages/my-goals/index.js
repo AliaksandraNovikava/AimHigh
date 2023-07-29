@@ -1,6 +1,7 @@
 import NewGoalsList from "@/components/NewGoalsList";
 import NewGoalDetails from "@/components/NewGoalDetails";
 import { StyledHeading } from "..";
+import Head from "next/head";
 
 export default function MyGoalsPage({
   newGoal,
@@ -21,6 +22,14 @@ export default function MyGoalsPage({
 }) {
   return (
     <>
+      <Head>
+        <title>AimHigh: Your set goals overview</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta
+          name="description"
+          content="Get an organized overview of your set goals with AimHigh. Track your progress, view deadlines, and stay focused on achieving your targets."
+        />
+      </Head>
       <StyledHeading>My Goals</StyledHeading>
       <NewGoalsList
         handleToggleChecked={handleToggleChecked}

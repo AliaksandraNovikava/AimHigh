@@ -1,6 +1,7 @@
 import { StyledHeading } from "..";
 import AchievementsList from "@/components/AchievementsList";
 import NewGoalDetails from "@/components/NewGoalDetails";
+import Head from "next/head";
 
 export default function AchievementsPage({
   newGoal,
@@ -21,6 +22,15 @@ export default function AchievementsPage({
 }) {
   return (
     <>
+      <Head>
+        <title>AimHigh: Achievements Overview</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta
+          name="description"
+          content="Explore your achievements and milestones. AimHigh helps you recognize your success and motivates you to reach even greater heights."
+        />
+      </Head>
+
       <StyledHeading>My Achievements</StyledHeading>
       <AchievementsList
         checkedGoals={checkedGoals}
