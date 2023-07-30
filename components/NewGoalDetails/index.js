@@ -9,6 +9,7 @@ export const StyledCloseButton = styled.span`
   position: absolute;
   top: 10px;
   right: 15px;
+  cursor: pointer;
 `;
 
 const StyledDeadlineBox = styled.div`
