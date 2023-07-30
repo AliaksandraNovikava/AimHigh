@@ -11,7 +11,7 @@ import { MarkedDaysProvider } from "@/components/DayPickerCalendar";
 import styled from "styled-components";
 
 const Main = styled.section`
-  margin-top: 30px;
+  margin-top: 70px;
 `;
 
 export default function App({ Component, pageProps }) {

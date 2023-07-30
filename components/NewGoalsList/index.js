@@ -38,7 +38,7 @@ export default function NewGoalsList({
       {uncheckedGoals.map((goal) => (
         <StyledCard
           key={goal.id}
-          backgroundcolor="#f6f5f8"
+          backgroundcolor="#fff"
           boxshadow="0 2px 6px rgb(109 94 255 / 10%)"
         >
           <NewGoalPreview
