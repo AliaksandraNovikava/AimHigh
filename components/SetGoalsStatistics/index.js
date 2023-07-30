@@ -1,4 +1,4 @@
-import { StyledList, StyledCard } from "../ProposedGoalsList";
+import { StyledList, StyledCard } from "../ProposedGoalsList/ProposedGoalsList";
 import { StyledTitle } from "../ProposedGoalPreview";
 import styled from "styled-components";
 

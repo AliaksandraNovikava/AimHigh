@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Image from "next/image";
 import Button from "../Button";
 import Modal from "../Modal";
-import { StyledCloseButton } from "../NewGoalDetails";
+import { StyledCloseButton } from "../NewGoalDetails/NewGoalDetails";
 
 export const StyledGoalText = styled.p`
   font-size: 1.2em;

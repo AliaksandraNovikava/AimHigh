@@ -1,5 +1,5 @@
 import { StyledList, StyledCard } from "@/components/NewGoalsList/index.js";
-import NewGoalPreview from "../NewGoalPreview";
+import NewGoalPreview from "../NewGoalPreview/NewGoalPreview";
 import { EmptyStateMessage } from "@/pages/statistics";
 import Lottie from "lottie-react";
 import animation from "@/public/animation/animation_lkoduokv.json";

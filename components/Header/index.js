@@ -1,4 +1,4 @@
-import { StyledCloseButton } from "../NewGoalDetails";
+import { StyledCloseButton } from "../NewGoalDetails/NewGoalDetails";
 import { EmptyStateMessage } from "@/pages/statistics";
 import { Input } from "../NewGoalForm";
 import { NavBar } from "../Navigation";

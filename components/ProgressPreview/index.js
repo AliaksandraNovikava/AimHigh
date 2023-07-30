@@ -4,7 +4,7 @@ import {
   StyledIconBox,
   StyledImage,
   StyledTitle,
-} from "../NewGoalPreview";
+} from "../NewGoalPreview/NewGoalPreview";
 import { differenceInDays, parseISO } from "date-fns";
 import Icon from "@mdi/react";
 import { mdiFire, mdiTimer } from "@mdi/js";

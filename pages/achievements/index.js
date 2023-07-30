@@ -1,6 +1,6 @@
 import { StyledHeading } from "..";
 import AchievementsList from "@/components/AchievementsList";
-import NewGoalDetails from "@/components/NewGoalDetails";
+import NewGoalDetails from "@/components/NewGoalDetails/NewGoalDetails";
 import Head from "next/head";
 
 export default function AchievementsPage({

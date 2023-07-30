@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import NewGoalPreview from "../NewGoalPreview";
+import NewGoalPreview from "../NewGoalPreview/NewGoalPreview";
 import { EmptyStateMessage } from "@/pages/statistics";
 import Link from "next/link";
 import Lottie from "lottie-react";

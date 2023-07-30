@@ -1,4 +1,4 @@
-import ProposedGoalsList from "@/components/ProposedGoalsList";
+import ProposedGoalsList from "@/components/ProposedGoalsList/ProposedGoalsList";
 import NewGoalForm from "@/components/NewGoalForm";
 import Button from "@/components/Button";
 import styled from "styled-components";

@@ -1,5 +1,5 @@
 import NewGoalsList from "@/components/NewGoalsList";
-import NewGoalDetails from "@/components/NewGoalDetails";
+import NewGoalDetails from "@/components/NewGoalDetails/NewGoalDetails";
 import { StyledHeading } from "..";
 import Head from "next/head";
 
