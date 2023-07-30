@@ -29,6 +29,24 @@ const Counter = styled.button`
   width: 30px;
   height: 30px;
   border: none;
+  background-color: #f6f5f8;
+`;
+
+const sharedStyles = `
+outline: 0;
+background: #f6f5f8;
+border: 0;
+padding: 5px;
+box-sizing: border-box;
+font-size: 14px;
+`;
+
+export const Select = styled.select`
+  ${sharedStyles}
+`;
+
+export const Input = styled.input`
+  ${sharedStyles}
 `;
 
 export default function NewGoalForm({
@@ -85,7 +103,7 @@ export default function NewGoalForm({
 
                   <div>
                     <label htmlFor="intervalSelect">times a </label>
-                    <select
+                    <Select
                       name="interval"
                       id="intervalSelect"
                       value={newGoal.interval}
@@ -94,7 +112,7 @@ export default function NewGoalForm({
                       <option value="day">Day</option>
                       <option value="week">Week</option>
                       <option value="month">Month</option>
-                    </select>
+                    </Select>
                   </div>
                 </>
               ) : (
@@ -108,7 +126,7 @@ export default function NewGoalForm({
                   <div>
                     <label htmlFor="newGoalInput">I want to</label>
                     <br></br>
-                    <input
+                    <Input
                       type="text"
                       id="newGoalInput"
                       value={newGoal.myGoal}
@@ -118,7 +136,7 @@ export default function NewGoalForm({
                   </div>
                   <div>
                     <label htmlFor="repetitionCheckbox">set repetition:</label>
-                    <input
+                    <Input
                       name="repetition"
                       type="checkbox"
                       id="repetitionCheckbox"
@@ -156,7 +174,7 @@ export default function NewGoalForm({
 
                       <div>
                         <label htmlFor="intervalSelect">times a </label>
-                        <select
+                        <Select
                           name="interval"
                           id="intervalSelect"
                           value={newGoal.interval}
@@ -165,7 +183,7 @@ export default function NewGoalForm({
                           <option value="day">Day</option>
                           <option value="week">Week</option>
                           <option value="month">Month</option>
-                        </select>
+                        </Select>
                       </div>
                     </>
                   )}
@@ -174,7 +192,7 @@ export default function NewGoalForm({
 
               <div>
                 <label htmlFor="setDeadlineCheckbox">set deadline</label>
-                <input
+                <Input
                   name="deadlineVisible"
                   type="checkbox"
                   id="setDeadlineCheckbox"
@@ -184,7 +202,7 @@ export default function NewGoalForm({
               </div>
               {newGoal.deadlineVisible && (
                 <div>
-                  <input
+                  <Input
                     name="deadline"
                     type="date"
                     id="deadlineInput"

@@ -17,7 +17,7 @@ export const NavBar = styled.nav`
   ${(props) =>
     props.$navbar === "true"
       ? "box-shadow: 0px -1px 0px rgba(58, 72, 80, 0.07), 0px -2px 11px -1px rgba(176, 189, 197, 0.12); padding: 13px 0; bottom: 0; justify-content: space-evenly;"
-      : "box-shadow: 0px 1px 11px rgba(58, 72, 80, 0.07), 0px -2px 11px -1px rgba(176, 189, 197, 0.12); padding: 8px 25px; top: 0; justify-content: space-between;"}
+      : "box-shadow: 0px 3px 11px rgba(58, 72, 80, 0.07), 0px -2px 11px -1px rgba(176, 189, 197, 0.12); padding: 8px 25px; top: 0; justify-content: space-between;"}
   align-items: center;
   z-index: 20;
 `;

@@ -1,5 +1,6 @@
 import { StyledCloseButton } from "../NewGoalDetails";
 import { EmptyStateMessage } from "@/pages/statistics";
+import { Input } from "../NewGoalForm";
 import { NavBar } from "../Navigation";
 import Button from "@/components/Button";
 import Image from "next/image";
@@ -80,7 +81,7 @@ export default function Header() {
             height={29}
           />
           <Greeting>
-            Hi <strong>{greeting}</strong>!
+            Hi <strong>{greeting}</strong>
           </Greeting>
         </GreetingBox>
         <ProfileImage>
@@ -108,28 +109,28 @@ export default function Header() {
             </ProfileImage>
             {isHeaderEditing ? (
               <>
-                <span>
+                <h2>
                   Hi{" "}
-                  <input
+                  <Input
                     type="text"
                     value={greeting}
                     onChange={(e) => setGreeting(e.target.value)}
-                  />{" "}
-                  !
-                </span>
+                  />
+                </h2>
                 <Button onClick={handleSaveHeader}>Save your name</Button>
               </>
             ) : (
               <>
-                <h2>Hi {greeting}!</h2>
+                <h2>Hi {greeting}</h2>
                 <Button onClick={handleEdit}>Change your name</Button>
               </>
             )}
             <EmptyStateMessage>
-              AimHigh is a powerful goal-setting and personal development app
-              designed to help you reach new heights in your life. Whether you
-              want to improve your health, career, or personal relationships,
-              AimHigh provides the tools and motivation to help you succeed.
+              <strong>AimHigh</strong> is a powerful goal-setting and personal
+              development app designed to help you reach new heights in your
+              life. Whether you want to improve your health, career, or personal
+              relationships, <strong>AimHigh</strong> provides the tools and
+              motivation to help you succeed.
             </EmptyStateMessage>
           </StyledModal>
           <StyledOverlay onClick={handleCloseHeaderModal} />

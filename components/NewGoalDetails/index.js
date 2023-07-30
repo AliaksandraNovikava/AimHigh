@@ -1,4 +1,4 @@
-import { StyledGoalText } from "@/components/NewGoalForm";
+import { StyledGoalText, Input, Select } from "@/components/NewGoalForm";
 import Modal from "../Modal";
 import DayPickerCalendar from "../DayPickerCalendar";
 import styled from "styled-components";
@@ -28,6 +28,12 @@ const StyledButtonsBox = styled.div`
 
 const StyledInput = styled.input`
   width: 50px;
+  outline: 0;
+  background: #f6f5f8;
+  border: 0;
+  padding: 5px;
+  box-sizing: border-box;
+  font-size: 14px;
 `;
 
 export default function NewGoalDetails({
@@ -58,7 +64,7 @@ export default function NewGoalDetails({
             onChange={onEditGoal}
           />
           <span> time(s) a </span>
-          <select
+          <Select
             name="interval"
             value={selectedGoal.interval}
             onChange={onEditGoal}
@@ -66,7 +72,7 @@ export default function NewGoalDetails({
             <option value="day">Day</option>
             <option value="week">Week</option>
             <option value="month">Month</option>
-          </select>
+          </Select>
         </div>
         <DayPickerCalendar
           isModalOpen={isModalOpen}
@@ -79,7 +85,7 @@ export default function NewGoalDetails({
     goalDeadline = (
       <StyledDeadlineBox>
         Deadline:
-        <input
+        <Input
           name="deadline"
           type="date"
           value={selectedGoal.deadline}
