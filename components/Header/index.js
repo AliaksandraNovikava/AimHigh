@@ -34,17 +34,11 @@ export default function Header() {
 
   function handleOpenHeaderModal() {
     setHeaderModalOpen(true);
-    console.log("after ModalOpen:", isHeaderModalOpen);
   }
-
-  useEffect(() => {
-    console.log("Updated ModalOpen:", isHeaderModalOpen);
-  }, [isHeaderModalOpen]);
 
   function handleCloseHeaderModal(event) {
     event.stopPropagation();
     setHeaderModalOpen(false);
-    console.log("after ModalClose:", isHeaderModalOpen);
     setHeaderEditing(false);
   }
 
