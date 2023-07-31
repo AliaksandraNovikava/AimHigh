@@ -44,7 +44,7 @@ export default function Navigation() {
     <>
       <NavBar $navbar="true">
         <StyledIconBox href="/" area-label="add new goal">
-          <Icon path={mdiPlusCircle} size={1.3} color="#000" />
+          <Icon path={mdiPlusCircle} size={1.3} color="#a662c3" />
           Add
         </StyledIconBox>
         <StyledIconBox href="/my-goals" area-label="view all my goals">

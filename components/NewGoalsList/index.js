@@ -20,8 +20,9 @@ export const StyledCard = styled.article`
 export const LinkButton = styled(Link)`
   padding: 10px 23px;
   margin-top: 20px;
-  background-color: #000;
+  background-color: #a662c3;
   color: #fff;
+  border: solid 2px #a662c3;
   border-radius: 10px;
   text-align: center;
   font-size: 1em;

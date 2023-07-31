@@ -3,6 +3,7 @@ import NewGoalForm from "@/components/NewGoalForm";
 import Button from "@/components/Button";
 import styled from "styled-components";
 import Head from "next/head";
+import { StyledButton } from "@/components/Button";
 
 export const StyledHeading = styled.h2`
   font-size: 21px;
@@ -40,7 +41,13 @@ export default function ProposedGoalsListPage({
         categoryColors={categoryColors}
         onOpenModal={handleOpenModalFromListItem}
       />
-      <Button onClick={handleOpenModal}>Set your own goal</Button>
+      <StyledButton
+        onClick={handleOpenModal}
+        backgroundcolor="#a662c3"
+        border="solid 2px #a662c3;"
+      >
+        Set your own goal
+      </StyledButton>
 
       <NewGoalForm
         newGoal={newGoal}
