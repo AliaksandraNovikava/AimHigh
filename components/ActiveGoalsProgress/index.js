@@ -1,13 +1,19 @@
 import { StyledList, StyledCard } from "../NewGoalsList";
+import { EmptyStateMessage } from "@/pages/statistics";
 import ProgressPreview from "../ProgressPreview";
 import { useEffect, useState } from "react";
+import Lottie from "lottie-react";
+import animation from "@/public/animation/meditation.json";
 
 export default function ActiveGoalsProgress({ uncheckedGoals }) {
   const [markedDaysCount, setMarkedDaysCount] = useState({});
   const [selectedGoalId, setSelectedGoalId] = useState(null);
+  const goalsWithInterval = uncheckedGoals
+    ? uncheckedGoals.filter((goal) => goal.interval !== null)
+    : [];
 
   useEffect(() => {
-    const countMarkedDays = () => {
+    function countMarkedDays() {
       const count = {};
       uncheckedGoals?.forEach((goal) => {
         const { id, days } = goal;
@@ -18,7 +24,7 @@ export default function ActiveGoalsProgress({ uncheckedGoals }) {
         }
       });
       setMarkedDaysCount(count);
-    };
+    }
     countMarkedDays();
   }, [uncheckedGoals]);
 
@@ -86,12 +92,27 @@ export default function ActiveGoalsProgress({ uncheckedGoals }) {
                   isIntervalMet={isIntervalMet}
                   showMessage={goal.id === selectedGoalId}
                   selectedGoalId={selectedGoalId}
+                  uncheckedGoals={uncheckedGoals}
                 />
               </StyledCard>
             );
           }
           return null;
         })}
+        {goalsWithInterval.length === 0 && (
+          <div>
+            <EmptyStateMessage margin="0">
+              No goals set for progress yet.
+            </EmptyStateMessage>
+            <Lottie
+              animationData={animation}
+              loop={true}
+              autoplay={true}
+              speed={0.5}
+              style={{ maxWidth: "400px" }}
+            />
+          </div>
+        )}
       </StyledList>
     </>
   );

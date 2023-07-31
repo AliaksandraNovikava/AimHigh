@@ -8,17 +8,17 @@ import {
   mdiChartBox,
 } from "@mdi/js";
 
-const NavBar = styled.nav`
+export const NavBar = styled.nav`
   display: flex;
   background-color: #fff;
-  box-shadow: 0px -1px 0px rgba(58, 72, 80, 0.07),
-    0px -2px 11px -1px rgba(176, 189, 197, 0.12);
-  padding: 13px 0;
   position: fixed;
-  bottom: 0;
   left: 0;
   right: 0;
-  justify-content: space-evenly;
+  ${(props) =>
+    props.$navbar === "true"
+      ? "box-shadow: 0px -1px 0px rgba(58, 72, 80, 0.07), 0px -2px 11px -1px rgba(176, 189, 197, 0.12); padding: 13px 0; bottom: 0; justify-content: space-evenly;"
+      : "box-shadow: 0px 3px 11px rgba(58, 72, 80, 0.07), 0px -2px 11px -1px rgba(176, 189, 197, 0.12); padding: 8px 25px; top: 0; justify-content: space-between;"}
+  align-items: center;
   z-index: 20;
 `;
 
@@ -42,9 +42,9 @@ const StyledIconBox = styled(Link)`
 export default function Navigation() {
   return (
     <>
-      <NavBar>
+      <NavBar $navbar="true">
         <StyledIconBox href="/" area-label="add new goal">
-          <Icon path={mdiPlusCircle} size={1.3} color="#000" />
+          <Icon path={mdiPlusCircle} size={1.3} color="#a662c3" />
           Add
         </StyledIconBox>
         <StyledIconBox href="/my-goals" area-label="view all my goals">

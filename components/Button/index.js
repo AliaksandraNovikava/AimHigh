@@ -1,15 +1,20 @@
 import styled from "styled-components";
 
-const StyledButton = styled.button`
+export const StyledButton = styled.button`
   font-size: 11px;
   padding: 10px 23px;
-  background-color: #000;
+  background-color: ${(props) => props.backgroundcolor};
   color: #fff;
   border-radius: 10px;
+  border: ${(props) => props.border};
   text-align: center;
   font-size: 1em;
 `;
 
 export default function Button({ children, onClick }) {
-  return <StyledButton onClick={onClick}>{children}</StyledButton>;
+  return (
+    <StyledButton onClick={onClick} backgroundcolor="#000">
+      {children}
+    </StyledButton>
+  );
 }

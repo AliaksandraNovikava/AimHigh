@@ -1,7 +1,9 @@
-import ProposedGoalsList from "@/components/ProposedGoalsList";
+import ProposedGoalsList from "@/components/ProposedGoalsList/ProposedGoalsList";
 import NewGoalForm from "@/components/NewGoalForm";
 import Button from "@/components/Button";
 import styled from "styled-components";
+import Head from "next/head";
+import { StyledButton } from "@/components/Button";
 
 export const StyledHeading = styled.h2`
   font-size: 21px;
@@ -25,13 +27,27 @@ export default function ProposedGoalsListPage({
 }) {
   return (
     <>
+      <Head>
+        <title>AimHigh: Achieve your goals and empower yourself</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta
+          name="description"
+          content="AimHigh is a goal-setting platform designed to help you set and achieve your goals. Develop yourself, track your progress, and stay motivated with AimHigh. Start reaching new heights today!"
+        />
+      </Head>
       <StyledHeading>Choose goal</StyledHeading>
       <ProposedGoalsList
         goals={goals}
         categoryColors={categoryColors}
         onOpenModal={handleOpenModalFromListItem}
       />
-      <Button onClick={handleOpenModal}>Set your own goal</Button>
+      <StyledButton
+        onClick={handleOpenModal}
+        backgroundcolor="#a662c3"
+        border="solid 2px #a662c3;"
+      >
+        Set your own goal
+      </StyledButton>
 
       <NewGoalForm
         newGoal={newGoal}

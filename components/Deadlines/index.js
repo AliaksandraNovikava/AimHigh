@@ -1,11 +1,14 @@
 import { StyledList, StyledCard } from "../NewGoalsList";
+import { EmptyStateMessage } from "@/pages/statistics";
 import ProgressPreview from "../ProgressPreview";
+import Lottie from "lottie-react";
+import animation from "@/public/animation/meditation.json";
 
 export default function Deadlines({ uncheckedGoals }) {
   const goalsWithDeadline = uncheckedGoals.filter(
     (goal) => goal.deadline !== null
   );
-  console.log("goalsWithDeadline:", goalsWithDeadline);
+
   return (
     <>
       <StyledList>
@@ -21,9 +24,24 @@ export default function Deadlines({ uncheckedGoals }) {
               uncheckedGoalId={goal.id}
               goal={goal}
               isDeadlineTab={true}
+              goalsWithDeadline={goalsWithDeadline}
             />
           </StyledCard>
         ))}
+        {goalsWithDeadline.length === 0 && (
+          <div>
+            <EmptyStateMessage margin="0">
+              No deadlines set yet.
+            </EmptyStateMessage>
+            <Lottie
+              animationData={animation}
+              loop={true}
+              autoplay={true}
+              speed={0.5}
+              style={{ maxWidth: "400px" }}
+            />
+          </div>
+        )}
       </StyledList>
     </>
   );

@@ -1,5 +1,8 @@
 import { StyledList, StyledCard } from "@/components/NewGoalsList/index.js";
-import NewGoalPreview from "../NewGoalPreview";
+import NewGoalPreview from "../NewGoalPreview/NewGoalPreview";
+import { EmptyStateMessage } from "@/pages/statistics";
+import Lottie from "lottie-react";
+import animation from "@/public/animation/animation_lkoduokv.json";
 
 export default function AchievementsList({
   checkedGoals,
@@ -22,6 +25,21 @@ export default function AchievementsList({
           />
         </StyledCard>
       ))}
+      {checkedGoals.length === 0 && (
+        <div>
+          <EmptyStateMessage>
+            No achievements yet. <br></br>Keep working hard and accomplishing
+            your goals to unlock your achievements!
+          </EmptyStateMessage>
+          <Lottie
+            animationData={animation}
+            loop={false}
+            autoplay={true}
+            speed={0.5}
+            style={{ maxWidth: "400px" }}
+          />
+        </div>
+      )}
     </StyledList>
   );
 }

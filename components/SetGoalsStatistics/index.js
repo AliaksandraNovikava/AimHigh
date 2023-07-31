@@ -1,9 +1,9 @@
-import { StyledList, StyledCard } from "../ProposedGoalsList";
+import { StyledList, StyledCard } from "../ProposedGoalsList/ProposedGoalsList";
 import { StyledTitle } from "../ProposedGoalPreview";
 import styled from "styled-components";
 
 const StyledNumber = styled.p`
-  font-size: 2.5em;
+  font-size: 2.3em;
   margin: 0;
 `;
 
