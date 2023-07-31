@@ -1,37 +1,46 @@
-# New Next Project
+# AimHigh
 
-This project was created from the neue fische `next` template.
+![AimHigh](/public/aimhigh_app_frames.jpg)
 
-You can [🔗 **use this template on CodeSandbox**](https://codesandbox.io/p/sandbox/github/neuefische/web-exercises/tree/main/templates/next?file=/README.md) or locally by running this command in your Terminal:
+## Achieve your goals and empower yourself
 
-```bash
-npx -y ghcd@latest neuefische/web-exercises/tree/main/templates/next my-app -i
-```
+AimHigh is a transformative goal-setting and personal growth app that empowers you to unlock your full potential and live a purposeful life. With a user-friendly interface and powerful features, AimHigh provides the guidance and motivation needed to turn your dreams into reality. Whether you want to improve your well-being, excel in your career, or cultivate meaningful relationships, AimHigh is your dedicated partner in the journey to success.
 
-## Development
+### Key Features:
 
-### Local Development
+- Set your personal goals.
+- Define intervals (daily, weekly, monthly) for recurring goals.
+- Set deadlines and receive timely reminders to stay committed and accountable.
+- Visualize your progress with an intuitive calendar view and mark days when you've successfully achieved your goals.
+- Update and delete set goals.
+- Get valuable insights and data to help you track and analyze your progress.
+- Get motivated with inspiring animations and feedback.
 
-To work locally, please install the dependencies using `npm i` first.
+### Demo:
 
-Run `npm run dev` to start a development server and open the displayed URL in a browser.
+- Visit the app website: [AimHigh](https://aim-high.vercel.app/).
 
-Use `npm run test` to run the tests.
+![Alt Text](/public/aimhigh_app_demo.gif)
 
-### CodeSandbox Cloud
+## Tech stack
 
-Select the "Preview: 3000" tab to view this project.
+- React
+- Next.js
+- React Testing Library
+- Jest
+- Styled Components
+- React DayPicker
+- LottieFiles
+- Material Design Icons
+- useLocalStorageState
+- confirmAlert
+- uid
 
-Select the "Tests: logs" tab to view the tests.
+## Project Setup
 
-> The `npm run dev` and `npm run test` scripts run automatically.
-
-### Scripts
-
-You can use the following commands:
-
-- `npm run dev` to start a development server
-- `npm run build` to build the project
-- `npm run start` to start a production server
-- `npm run test` to run the tests
-- `npm run lint` to run the linter
+- Clone this repository.
+- Install all dependencies using `npm i`.
+- Run `npm run dev` to start a development server.
+- Server: http://localhost:3000/
+- Run `npm run build` to build the project.
+- Use `npm run test` to run the tests.
