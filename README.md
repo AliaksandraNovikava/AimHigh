@@ -24,17 +24,25 @@ AimHigh is a transformative goal-setting and personal growth app that empowers y
 
 ## Tech stack
 
+Highlights:
+
 - React
 - Next.js
 - React Testing Library
 - Jest
 - Styled Components
-- React DayPicker
+
+Visuals:
+
 - LottieFiles
 - Material Design Icons
+
+Other (React) Libraries:
+
+- React DayPicker
 - useLocalStorageState
 - confirmAlert
-- uid
+- uuid
 
 ## Project Setup
 
