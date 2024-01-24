@@ -43,19 +43,19 @@ export default function Navigation() {
   return (
     <>
       <NavBar $navbar="true">
-        <StyledIconBox href="/" area-label="add new goal">
+        <StyledIconBox href="/" aria-label="add new goal">
           <Icon path={mdiPlusCircle} size={1.3} color="#a662c3" />
           Add
         </StyledIconBox>
-        <StyledIconBox href="/my-goals" area-label="view all my goals">
+        <StyledIconBox href="/my-goals" aria-label="view all my goals">
           <Icon path={mdiBullseyeArrow} size={1.3} color="#000" />
           My Goals
         </StyledIconBox>
-        <StyledIconBox href="/achievements" area-label="view all my goals">
+        <StyledIconBox href="/achievements" aria-label="view all my goals">
           <Icon path={mdiTrophy} size={1.3} color="#000" />
           Achievements
         </StyledIconBox>
-        <StyledIconBox href="/statistics" area-label="view statistics">
+        <StyledIconBox href="/statistics" aria-label="view statistics">
           <Icon path={mdiChartBox} size={1.3} color="#000" />
           Statistics
         </StyledIconBox>
