@@ -16,6 +16,10 @@ AimHigh is a transformative goal-setting and personal growth app that empowers y
 - Get valuable insights and data to help you track and analyze your progress.
 - Get motivated with inspiring animations and feedback.
 
+### Prototype:
+
+- View the prototype in Figma: [AimHigh App Prototype](https://www.figma.com/file/TyNlG3VcZEBYxo1MBJQZCb/AimHigh-App?type=design&node-id=0-1&mode=design)
+
 ### Demo:
 
 - Visit the app website: [AimHigh](https://aim-high.vercel.app/).
